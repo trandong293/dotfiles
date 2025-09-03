@@ -1,0 +1,13 @@
+*
+!*/**
+# directories
+!alacritty/
+!fcitx5/
+!fish/
+!hypr/
+!nvim/
+!rofi/
+# files
+!readme.md
+!.tmux.conf
+!.gitignore
