@@ -9,7 +9,7 @@ HYPR_TOUCHPAD_STATE=/tmp/hypr_touchpad_state
 MY_DEFAULT_TOUCHPAD=elan1300:00-04f3:3057-touchpad
 
 # touchpad state file (I want the touchpad to be disabled by default)
-[[ ! -e $HYPR_TOUCHPAD_STATE ]] && echo 1 >$HYPR_TOUCHPAD_STATE
+[[ ! -e $HYPR_TOUCHPAD_STATE ]] && echo 0 >$HYPR_TOUCHPAD_STATE
 
 # touchpad toggle
 current_state=$(cat $HYPR_TOUCHPAD_STATE)
