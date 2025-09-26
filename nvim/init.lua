@@ -15,9 +15,7 @@ vim.o.tabstop = 2
 vim.diagnostic.config({
   severity_sort = true,
   update_in_insert = true,
-  virtual_text = {
-    severity = { min = vim.diagnostic.severity.WARN }
-  },
+  virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
   signs = false,
 })
 
@@ -40,9 +38,8 @@ local buffer_autoformat = function(buffer)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = buffer,
     group = group,
-    callback = function()
-      vim.lsp.buf.format({ async = false }) -- async fail with html
-    end
+    -- async fail with html end
+    callback = function() vim.lsp.buf.format({ async = false }) end
   })
 end
 
@@ -50,9 +47,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(event)
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if client == nil then
-      return
-    end
+    if client == nil then return end
     -- format on save
     if client.supports_method("textDocument/formatting") then
       buffer_autoformat(event.buf)
@@ -65,9 +60,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- fix stupid nvim cannot treat htmlangular as html
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "htmlangular",
+  callback = function() vim.bo.filetype = "html" end
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    "lua",
+    "c",
+    "c_sharp",
+    "python",
+    "bash",
+    "javascript", "typescript",
+    "html",
+    "css", "scss",
+    "rust",
+    "go",
+    "htmlangular"
+  },
   callback = function()
-    vim.bo.filetype = "html"
-  end
+    vim.treesitter.start()
+    vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+    vim.bo.indentexpr = "v:lua.require('nvim-treesitter').indentexpr()"
+  end,
 })
 
 require("config.lazy")

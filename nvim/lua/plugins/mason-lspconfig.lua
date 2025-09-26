@@ -5,15 +5,22 @@ return {
     require("mason").setup({})
     require("mason-lspconfig").setup({
       ensure_installed = {
-        "lua_ls", "clangd", "omnisharp", "bashls", "ts_ls", "html", "superhtml",
-        "cssls", "jedi_language_server", "ruff", "harper_ls", "angularls",
-        "gopls"
+        "lua_ls",
+        "clangd",
+        "omnisharp",
+        "bashls",
+        "ts_ls",
+        "html", "superhtml",
+        "cssls",
+        "jedi_language_server", "ruff",
+        "harper_ls",
+        "angularls",
+        "gopls",
+        "texlab"
       }
     })
     -- install not a lsp
-    local not_lsp = {
-      "shfmt", "shellcheck"
-    }
+    local not_lsp = { "shfmt", "shellcheck" }
     local registry = require("mason-registry")
     for _, pkg_name in ipairs(not_lsp) do
       local ok, pkg = pcall(registry.get_package, pkg_name)

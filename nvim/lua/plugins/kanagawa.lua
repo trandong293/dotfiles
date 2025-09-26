@@ -14,6 +14,7 @@ return {
         }
       end
     })
+    -- theme
     vim.cmd("colorscheme kanagawa-dragon")
-  end,
+  end
 }

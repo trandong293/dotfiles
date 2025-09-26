@@ -4,7 +4,7 @@ return {
   branch = "main",
   build = ":TSUpdate",
   config = function()
-    require("nvim-treesitter").setup({
+    require("nvim-treesitter").install({
       "lua",
       "c",
       "c_sharp",
@@ -16,6 +16,7 @@ return {
       "rust",
       "go",
       "angular",
+      "latex", "bibtex"
     })
   end,
 }

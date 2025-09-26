@@ -1,5 +1,5 @@
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(event)
