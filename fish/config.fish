@@ -27,5 +27,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # go
 export GOROOT="$HOME/.go"
-export GOPATH="$HOME/.local/state/go"
+export GOPATH="$HOME/.local/share/go"
 export PATH="$GOROOT/bin:$PATH"
