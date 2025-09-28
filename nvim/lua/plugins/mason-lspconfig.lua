@@ -20,7 +20,10 @@ return {
       }
     })
     -- install not a lsp
-    local not_lsp = { "shfmt", "shellcheck" }
+    local not_lsp = {
+      "shfmt", "shellcheck",
+      "tex-fmt"
+    }
     local registry = require("mason-registry")
     for _, pkg_name in ipairs(not_lsp) do
       local ok, pkg = pcall(registry.get_package, pkg_name)
