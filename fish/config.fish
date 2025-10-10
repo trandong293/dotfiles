@@ -19,7 +19,9 @@ export PATH="$CARGO_HOME/bin:$PATH"
 
 # uv 
 export UV_INSTALL_DIR="$HOME/.uv"
+export UV_TOOL_BIN_DIR="$HOME/.local/bin"
 export PATH="$UV_INSTALL_DIR:$PATH"
+export PATH="$UV_TOOL_BIN_DIR:$PATH"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -29,3 +31,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export GOROOT="$HOME/.go"
 export GOPATH="$HOME/.local/share/go"
 export PATH="$GOROOT/bin:$PATH"
+
