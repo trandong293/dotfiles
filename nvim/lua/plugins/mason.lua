@@ -15,19 +15,18 @@ return {
       "gopls",
       "texlab", "tex-fmt"
     }
-    -- only run when add new lsp
-    --local registry = require("mason-registry")
-    --not_yet_installed = {}
-    --for _, v in ipairs(ensure_installed) do
-    --  if not registry.is_installed(v) then
-    --    not_yet_installed[#not_yet_installed + 1] = v
-    --  end
-    --end
-    --require("mason.api.command").MasonInstall(not_yet_installed)
+    local registry = require("mason-registry")
+    local not_yet_installed = {}
+    for _, v in ipairs(ensure_installed) do
+      if not registry.is_installed(v) then
+        not_yet_installed[#not_yet_installed + 1] = v
+      end
+    end
+    if #not_yet_installed > 0 then
+      require("mason.api.command").MasonInstall(not_yet_installed)
+    end
 
-    -- shfmt and shellcheck are automatically enabled
-    -- https://github.com/bash-lsp/bash-language-server?tab=readme-ov-file#dependencies
-    vim.lsp.enable("bashls")
+    vim.lsp.enable("bashls") -- shfmt and shellcheck are automatically enabled
     vim.lsp.enable("lua_ls")
     vim.lsp.enable("clangd")
     vim.lsp.enable("omnisharp")
@@ -39,8 +38,7 @@ return {
     vim.lsp.enable("ruff")
     vim.lsp.enable("zuban")
     vim.lsp.enable("harper_ls")
-    vim.lsp.enable("golsp")
-    -- tex-fmt: lspconfig
-    vim.lsp.enable("texlab")
+    vim.lsp.enable("gopls")
+    vim.lsp.enable("texlab") -- tex-fmt: set via vim.lsp.config
   end
 }
