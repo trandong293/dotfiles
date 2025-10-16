@@ -10,10 +10,11 @@ return {
       "omnisharp",
       "typescript-language-server", "html-lsp", "superhtml", "css-lsp",
       "angular-language-server",
-      "ruff", "zuban",
+      "ruff", "zuban", "pyrefly", "jedi-language-server",
       "harper-ls",
       "gopls",
-      "texlab", "tex-fmt"
+      "texlab", "tex-fmt",
+      "rust-analyzer"
     }
     local registry = require("mason-registry")
     local not_yet_installed = {}
@@ -37,8 +38,11 @@ return {
     vim.lsp.enable("angularls")
     vim.lsp.enable("ruff")
     vim.lsp.enable("zuban")
+    --vim.lsp.enable("pyrefly")
+    --vim.lsp.enable("jedi_language_server")
     vim.lsp.enable("harper_ls")
     vim.lsp.enable("gopls")
     vim.lsp.enable("texlab") -- tex-fmt: set via vim.lsp.config
+    vim.lsp.enable("rust_analyzer")
   end
 }
