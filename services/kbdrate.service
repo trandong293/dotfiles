@@ -1,0 +1,11 @@
+[Unit]
+Description=Set keyboard repeat rate at startup
+After=systemd-modules-load.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/kbdrate -d 1000
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
