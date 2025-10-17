@@ -7,7 +7,7 @@
 !hypr/
 !nvim/
 !rofi/
-!services/
+!_storage/
 # files
 !readme.md
 !.tmux.conf
