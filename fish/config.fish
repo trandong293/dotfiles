@@ -4,31 +4,35 @@ end
 
 set -U fish_greeting
 
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
 # dotnet
+# - there is no way to modify installation dir of global tools using envvar
+# - fucking microsoft with stupid dotnet-install-scripts
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export DOTNET_ROOT="$HOME/.dotnet"
-export PATH="$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
-
-# volta
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# rust
-export CARGO_HOME="$HOME/.cargo"
-export PATH="$CARGO_HOME/bin:$PATH"
+set DOTNET_HOME "$HOME/.local/share/dotnet"
+export DOTNET_ROOT="$DOTNET_HOME/dotnet_current"
+set DOTNET_TOOL "$HOME/.dotnet/tools"
+export PATH="$DOTNET_HOME:$DOTNET_TOOL:$PATH"
 
 # uv 
-export UV_INSTALL_DIR="$HOME/.uv"
-export UV_TOOL_BIN_DIR="$HOME/.local/bin"
-export PATH="$UV_INSTALL_DIR:$PATH"
-export PATH="$UV_TOOL_BIN_DIR:$PATH"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+export UV_INSTALL_DIR="$HOME/.local/share/uv"
+export UV_TOOL_BIN_DIR="$UV_INSTALL_DIR/tools"
+export PATH="$UV_INSTALL_DIR:$UV_TOOL_BIN_DIR:$PATH"
 
 # go
-export GOROOT="$HOME/.go"
-export GOPATH="$HOME/.local/share/go"
-export PATH="$GOROOT/bin:$PATH"
+set GO_HOME "$HOME/.local/share/go"
+export GOROOT="$GO_HOME/go_current"
+export GOPATH="$GO_HOME/packages"
+export PATH="$GO_HOME:$GOPATH/bin:$PATH"
+
+# rust
+#export CARGO_HOME="$HOME/.cargo"
+#export PATH="$CARGO_HOME/bin:$PATH"
+
+# bun
+#export BUN_INSTALL="$HOME/.bun"
+#export PATH="$BUN_INSTALL/bin:$PATH"
 
