@@ -1,6 +1,6 @@
 return {
   -- fix stupid warning spams
-  on_attach = function(client)
+  on_init = function(client)
     client.server_capabilities.textDocumentSync.save = false
   end,
 }

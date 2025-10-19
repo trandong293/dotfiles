@@ -1,6 +1,7 @@
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 
+-- fix omnisharp decompilation
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(event)
     local omni_ex = require("omnisharp_extended")

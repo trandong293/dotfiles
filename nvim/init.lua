@@ -57,12 +57,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end
 })
 
--- fix stupid nvim cannot treat htmlangular as html
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "htmlangular",
-  callback = function() vim.bo.filetype = "html" end
-})
-
+-- treesitter
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {
     "lua",
