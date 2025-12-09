@@ -8,6 +8,7 @@
 !nvim/
 !rofi/
 !_storage/
+!wireplumber
 # files
 !readme.md
 !.tmux.conf
