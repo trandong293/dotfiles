@@ -16,7 +16,8 @@ return {
       "rust",
       "go",
       "angular",
-      "latex", "bibtex"
+      "latex", "bibtex",
+      "make", "cmake",
     })
   end,
 }
