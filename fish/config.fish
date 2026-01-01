@@ -26,7 +26,7 @@ export PATH="$UV_INSTALL_DIR:$UV_TOOL_BIN_DIR:$PATH"
 set GO_HOME "$HOME/.local/share/go"
 export GOROOT="$GO_HOME/go_current"
 export GOPATH="$GO_HOME/packages"
-export PATH="$GO_HOME:$GOPATH/bin:$PATH"
+export PATH="$GO_HOME:$GOROOT/bin:$PATH"
 
 # rust
 #export CARGO_HOME="$HOME/.cargo"
