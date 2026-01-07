@@ -36,6 +36,11 @@ for fname, ftype in vim.fs.dir(plugins_path) do
   end
 end
 
+local vsdevshell_path = "C:\\Program Files\\Microsoft Visual Studio\\*\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1"
+local cmake_win_mapping = function(build_task)
+  return { "&" .. " " .. vsdevshell_path, build_task }
+end
+
 local pack_changed_hook = function(ev)
   local name, kind = ev.data.spec.name, ev.data.kind
   if kind == "install" or kind == "update" then
@@ -43,20 +48,25 @@ local pack_changed_hook = function(ev)
     if not build_task then
       return
     end
-    --log:write("build", ev)
+
     local btype = type(build_task)
     if btype == "function" then
       vim.cmd.packadd(name)
       pcall(build_task)
-      --log:write("build using lua function")
     elseif build_task:sub(1, 1) == ":" then
       vim.cmd.packadd(name)
       vim.cmd(build_task:sub(2))
-      --log:write("build using editor command")
     else
+      -- cmake build is required
       local path = ev.data.path
-      --log:write("build " .. name .. " at " .. path .. " with " .. build_task)
-      vim.system({ "sh" }, { stdin = build_task, cwd = path }):wait()
+      local os_name = vim.loop.os_uname().sysname
+      local shell, stdin
+      if os_name:find("Windows") then
+        shell, stdin = "pwsh", cmake_win_mapping(build_task)
+      elseif os_name:find("Linux") then
+        shell, stdin = "sh", build_task
+      end
+      vim.system({ shell }, { stdin = stdin, cwd = path }):wait()
     end
   else -- kind == "delete"
     -- delete flow: remove plug from vim.pack.add (disable), :restart buffer if
