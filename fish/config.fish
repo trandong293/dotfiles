@@ -15,11 +15,12 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 set DOTNET_HOME "$HOME/.local/share/dotnet"
 export DOTNET_ROOT="$DOTNET_HOME/dotnet_current"
 set DOTNET_TOOL "$HOME/.dotnet/tools"
-export PATH="$DOTNET_HOME:$DOTNET_TOOL:$PATH"
+export PATH="$DOTNET_ROOT:$DOTNET_TOOL:$PATH"
 
 # uv 
 export UV_INSTALL_DIR="$HOME/.local/share/uv"
 export UV_TOOL_BIN_DIR="$UV_INSTALL_DIR/tools"
+export UV_PYTHON_BIN_DIR="$UV_INSTALL_DIR"
 export PATH="$UV_INSTALL_DIR:$UV_TOOL_BIN_DIR:$PATH"
 
 # go
