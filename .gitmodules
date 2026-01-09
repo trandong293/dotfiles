@@ -1,3 +1,6 @@
 [submodule "tmux/plugins/tmux-dotbar"]
 	path = tmux/plugins/tmux-dotbar
 	url = https://github.com/vaaleyard/tmux-dotbar
+[submodule "nvim"]
+	path = nvim
+	url = git@github.com:trandong293/dotfiles_nvim
