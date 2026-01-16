@@ -51,6 +51,7 @@ return {
       "lua-language-server",
       "clangd",
       "roslyn",
+      "tsgo", "css-lsp", "html-lsp", "angular-language-server",
     }
     local reg = require("mason-registry")
     local n_ins_pkgs = {}
@@ -69,6 +70,7 @@ return {
       "lua_ls",
       "clangd",
       "roslyn_ls",
+      "tsgo", "cssls", "html", "angularls",
     }
     vim.lsp.enable(lss)
   end
