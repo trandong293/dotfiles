@@ -3,9 +3,16 @@ return {
   branch = "main",
   build = ":TSUpdate",
   config = function()
-    langs = { "lua", "c", }
+    local langs = {
+      "lua",
+      "c", "glsl",
+      "c_sharp",
+      "javascript", "typescript", "html", "css", "angular",
+      "json", "toml", "yaml", "csv",
+      "markdown", "markdown_inline",
+    }
     require("nvim-treesitter").install(langs)
-    
+
     -- highlight
     local ts_hl_aug = vim.api.nvim_create_augroup("TsHlAug", { clear = true })
     vim.api.nvim_create_autocmd("FileType", {
