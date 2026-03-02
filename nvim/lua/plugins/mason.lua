@@ -15,10 +15,10 @@ return {
     vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action)
 
     local auto_format = function(buf)
-      local auto_format_aug = vim.api.nvim_create_augroup("AutoFormat", { clear = true })
+      local format_on_save_aug = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
-        group = auto_format_aug,
-        buffer = buf,
+        pattern = "*",
+        group = format_on_save_aug,
         callback = function()
           vim.lsp.buf.format({ async = false })
         end
