@@ -6,7 +6,7 @@ return {
     local langs = {
       "lua",
       "c", "glsl",
-      "c_sharp",
+      "c_sharp", "razor",
       "javascript", "typescript", "html", "css", "angular",
       "json", "toml", "yaml", "csv",
       "markdown", "markdown_inline",

@@ -28,4 +28,6 @@ vim.diagnostic.config({
   signs = false,
 })
 
+vim.filetype.add({ extension = { razor = "razor" } })
+
 require("plugins")
