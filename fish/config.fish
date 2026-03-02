@@ -34,6 +34,6 @@ export PATH="$GO_HOME:$GOROOT/bin:$PATH"
 #export PATH="$CARGO_HOME/bin:$PATH"
 
 # bun
-#export BUN_INSTALL="$HOME/.bun"
-#export PATH="$BUN_INSTALL/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
