@@ -52,6 +52,7 @@ return {
       "clangd",
       "roslyn",
       "tsgo", "css-lsp", "html-lsp", "angular-language-server",
+      "zuban", "ruff",
     }
     local reg = require("mason-registry")
     local n_ins_pkgs = {}
@@ -71,6 +72,7 @@ return {
       "clangd",
       "roslyn_ls",
       "tsgo", "cssls", "html", "angularls",
+      "zuban", "ruff",
     }
     vim.lsp.enable(lss)
   end
