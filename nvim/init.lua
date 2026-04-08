@@ -2,6 +2,7 @@ vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro nornu" -- +nu
 vim.g.mapleader = " "
 
 vim.o.number = true
+vim.o.relativenumber = true
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
 vim.o.colorcolumn = "81"

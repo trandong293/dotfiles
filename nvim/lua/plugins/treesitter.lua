@@ -5,11 +5,13 @@ return {
   config = function()
     local langs = {
       "lua",
-      "c", "glsl",
+      "c", "glsl", "asm",
+      "bash",
       "c_sharp", "razor",
       "javascript", "typescript", "html", "css", "angular",
       "json", "toml", "yaml", "csv",
       "markdown", "markdown_inline",
+      "latex",
     }
     require("nvim-treesitter").install(langs)
 
