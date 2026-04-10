@@ -29,6 +29,10 @@ vim.diagnostic.config({
   signs = false,
 })
 
+-- https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
+-- conflict with netrw
+vim.keymap.set("n", "<leader>bd", ":bp<bar>sp<bar>bn<bar>bd<CR>")
+
 vim.filetype.add({ extension = { razor = "razor" } })
 
 require("plugins")

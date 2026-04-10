@@ -12,6 +12,7 @@ return {
       "json", "toml", "yaml", "csv",
       "markdown", "markdown_inline",
       "latex",
+      "scheme", -- gimp
     }
     require("nvim-treesitter").install(langs)
 
