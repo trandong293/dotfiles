@@ -10,6 +10,7 @@
 !tmux/
 !._storage_/
 !wireplumber
+!pacman/
 # files
 !readme.md
 !.tmux.conf
