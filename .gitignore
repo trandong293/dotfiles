@@ -11,6 +11,7 @@
 !._storage_/
 !wireplumber
 !pacman/
+!mpv
 # files
 !readme.md
 !.tmux.conf
