@@ -105,25 +105,61 @@
         "optional_repositories": []
     },
     "network_config": {
-        "type": "nm"
+        "type": "nm_iwd"
     },
     "ntp": true,
     "packages": [
-        "alacritty", "fish", "tmux",
-        "git", "openssh", "fd", "ripgrep", "less", "jq", "bat", "unzip", "vim", "wl-clipboard", "htop", "brightnessctl", "tldr", "glow", "man-db",
-        "hypridle", "hyprland", "hyprlock", "hyprpaper", "hyprpicker", "hyprpolkitagent", "xdg-desktop-portal-hyprland",
-        "noto-fonts", "noto-fonts-cjk", "noto-fonts-emoji", "noto-fonts-extra", "ttf-agave-nerd",
-        "fcitx5", "fcitx5-bamboo",
-        "grim", "slurp",
-        "mpv", "feh",
+        "alacritty",
+        "fish",
+        "tmux",
+        "git",
+        "openssh",
+        "fd",
+        "ripgrep",
+        "less",
+        "jq",
+        "bat",
+        "unzip",
+        "vim",
+        "wl-clipboard",
+        "htop",
+        "brightnessctl",
+        "tldr",
+        "glow",
+        "man-db",
+        "hypridle",
+        "hyprland",
+        "hyprlock",
+        "hyprpaper",
+        "hyprpicker",
+        "hyprpolkitagent",
+        "xdg-desktop-portal-hyprland",
+        "noto-fonts",
+        "noto-fonts-cjk",
+        "noto-fonts-emoji",
+        "noto-fonts-extra",
+        "ttf-agave-nerd",
+        "fcitx5",
+        "fcitx5-bamboo",
+        "grim",
+        "slurp",
+        "mpv",
+        "feh",
         "rofi",
-        "nautilus", "adw-gtk-theme", "xdg-desktop-portal-gtk",
+        "nautilus",
+        "adw-gtk-theme",
+        "xdg-desktop-portal-gtk",
         "rtkit",
         "base-devel",
-        "firefox", "intel-media-driver",
-        "zathura", "zathura-pdf-poppler"
+        "firefox",
+        "intel-media-driver",
+        "zathura",
+        "zathura-pdf-poppler"
     ],
-    "parallel_downloads": 0,
+    "pacman_config": {
+        "color": true,
+        "parallel_downloads": 5
+    },
     "profile_config": {
         "gfx_driver": null,
         "greeter": null,
@@ -140,5 +176,5 @@
         "enabled": true
     },
     "timezone": "Asia/Ho_Chi_Minh",
-    "version": "3.0.15"
+    "version": "4.2"
 }
