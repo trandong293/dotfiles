@@ -44,7 +44,7 @@ aur_package_install() {
   git clone $url
   cd $name
   makepkg
-  sudo pacman -U $(find -type f -name "*.pkg.tar.zst")
+  sudo pacman -U $(find -type f -name "*.pkg.tar.zst") < /dev/tty
   cd ~
 }
 
