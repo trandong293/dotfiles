@@ -32,3 +32,23 @@ echo "[INFO] setup git"
 echo "[INFO] git config email, name"
 git config --global user.email "trandong2932002@gmail.com"
 git config --global user.name "Tran Dong"
+
+echo "[INFO] setup aur packages"
+aur_dir=~/must_build/
+mkdir -p $aur_dir
+
+aur_package_install() {
+  url=$1
+  name=$(basename $1 .git)
+  cd $aur_dir
+  git clone $url
+  cd $name
+  makepkg
+  sudo pacman -U $(find -type f -name "*.pkg.tar.zst")
+  cd ~
+}
+
+echo "[INFO] aur tree-sitter-cli"
+aur_package_install https://aur.archlinux.org/tree-sitter-cli-github-bin.git
+echo "[INFO] aur neovim"
+aur_package_install https://aur.archlinux.org/neovim-nightly-bin.git
