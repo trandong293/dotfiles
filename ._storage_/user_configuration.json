@@ -1,0 +1,144 @@
+{
+    "app_config": {
+        "audio_config": {
+            "audio": "pipewire"
+        },
+        "bluetooth_config": {
+            "enabled": true
+        }
+    },
+    "archinstall-language": "English",
+    "auth_config": {},
+    "bootloader_config": {
+        "bootloader": "Systemd-boot",
+        "removable": false,
+        "uki": true
+    },
+    "custom_commands": [],
+    "disk_config": {
+        "config_type": "default_layout",
+        "device_modifications": [
+            {
+                "device": "/dev/sdb",
+                "partitions": [
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [
+                            "boot",
+                            "esp"
+                        ],
+                        "fs_type": "fat32",
+                        "mount_options": [],
+                        "mountpoint": "/boot",
+                        "obj_id": "051d06b0-f139-4a0a-9490-4de29733a530",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "GiB",
+                            "value": 1
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "MiB",
+                            "value": 1
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    },
+                    {
+                        "btrfs": [],
+                        "dev_path": null,
+                        "flags": [],
+                        "fs_type": "ext4",
+                        "mount_options": [],
+                        "mountpoint": "/",
+                        "obj_id": "6c1dfeec-d743-4a49-a023-42121cf7bf0b",
+                        "size": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 254984323072
+                        },
+                        "start": {
+                            "sector_size": {
+                                "unit": "B",
+                                "value": 512
+                            },
+                            "unit": "B",
+                            "value": 1074790400
+                        },
+                        "status": "create",
+                        "type": "primary"
+                    }
+                ],
+                "wipe": true
+            }
+        ]
+    },
+    "hostname": "tomca",
+    "kernels": [
+        "linux"
+    ],
+    "locale_config": {
+        "kb_layout": "us",
+        "sys_enc": "UTF-8",
+        "sys_lang": "en_US.UTF-8"
+    },
+    "mirror_config": {
+        "custom_repositories": [],
+        "custom_servers": [],
+        "mirror_regions": {
+            "Vietnam": [
+                "http://mirror.bizflycloud.vn/archlinux/$repo/os/$arch",
+                "https://mirrors.nguyenhoang.cloud/archlinux/$repo/os/$arch",
+                "https://mirrors.huongnguyen.dev/arch/$repo/os/$arch"
+            ]
+        },
+        "optional_repositories": []
+    },
+    "network_config": {
+        "type": "nm"
+    },
+    "ntp": true,
+    "packages": [
+        "alacritty", "fish", "tmux",
+        "git", "openssh", "fd", "ripgrep", "less", "jq", "bat", "unzip", "vim", "wl-clipboard", "htop", "brightnessctl", "tldr", "glow", "man-db",
+        "hypridle", "hyprland", "hyprlock", "hyprpaper", "hyprpicker", "hyprpolkitagent", "xdg-desktop-portal-hyprland",
+        "noto-fonts", "noto-fonts-cjk", "noto-fonts-emoji", "noto-fonts-extra", "ttf-agave-nerd",
+        "fcitx5", "fcitx5-bamboo",
+        "grim", "slurp",
+        "mpv", "feh",
+        "rofi",
+        "nautilus", "adw-gtk-theme", "xdg-desktop-portal-gtk",
+        "rtkit",
+        "base-devel",
+        "firefox", "intel-media-driver",
+        "zathura", "zathura-pdf-poppler"
+    ],
+    "parallel_downloads": 0,
+    "profile_config": {
+        "gfx_driver": null,
+        "greeter": null,
+        "profile": {
+            "custom_settings": {},
+            "details": [],
+            "main": "Minimal"
+        }
+    },
+    "script": null,
+    "services": [],
+    "swap": {
+        "algorithm": "zstd",
+        "enabled": true
+    },
+    "timezone": "Asia/Ho_Chi_Minh",
+    "version": "3.0.15"
+}
