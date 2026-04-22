@@ -1,5 +1,7 @@
 #/usr/bin/env sh
 
+# sh -c "$(curl https://raw.githubusercontent.com/trandong293/dotfiles/HEAD/init.sh)"
+
 echo "[INFO] clone trandong293 dotfiles"
 git clone https://github.com/trandong293/dotfiles.git ~/.config
 git submodule update --init
@@ -38,17 +40,25 @@ aur_dir=~/must_build/
 mkdir -p $aur_dir
 
 aur_package_install() {
-  url=$1
-  name=$(basename $1 .git)
+  name=$1
+  url="https://aur.archlinux.org/$name.git"
   cd $aur_dir
   git clone $url
   cd $name
-  makepkg
-  sudo pacman -U $(find -type f -name "*.pkg.tar.zst") < /dev/tty
+  makepkg -sirc
   cd ~
 }
 
 echo "[INFO] aur tree-sitter-cli"
-aur_package_install https://aur.archlinux.org/tree-sitter-cli-github-bin.git
+aur_package_install tree-sitter-cli-github-bin
 echo "[INFO] aur neovim"
-aur_package_install https://aur.archlinux.org/neovim-nightly-bin.git
+aur_package_install neovim-nightly-bin
+
+echo "[INFO] aur tlrc-bin"
+aur_package_install tlrc-bin
+
+echo "[INFO] aur iloader-bin"
+aur_package_install iloader-bin
+
+echo "[INFO] aur cloudflare-warp-bin"
+aur_package_install cloudflare-warp-bin
