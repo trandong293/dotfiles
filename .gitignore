@@ -12,6 +12,7 @@
 !wireplumber
 !pacman/
 !mpv
+!zathura
 # files
 !readme.md
 !.tmux.conf
