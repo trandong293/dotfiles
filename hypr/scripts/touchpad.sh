@@ -8,19 +8,17 @@
 HYPR_TOUCHPAD_STATE=/tmp/hypr_touchpad_state
 MY_DEFAULT_TOUCHPAD=elan1300:00-04f3:3057-touchpad
 
-# touchpad state file (touchpad state is disabled by default)
-# I want it to be enable by default
+# touchpad state file (enabled)
 init() {
-  [[ ! -e $HYPR_TOUCHPAD_STATE ]] && echo 0 >$HYPR_TOUCHPAD_STATE
-  toggle
+  [[ ! -e $HYPR_TOUCHPAD_STATE ]] && echo 1 > $HYPR_TOUCHPAD_STATE
 }
 
 # touchpad toggle
 toggle() {
   current_state=$(cat $HYPR_TOUCHPAD_STATE)
   new_state=$((1 - current_state))
-  echo $new_state >$HYPR_TOUCHPAD_STATE
-  hyprctl keyword -r -- device[$MY_DEFAULT_TOUCHPAD]:enabled $new_state
+  echo $new_state > $HYPR_TOUCHPAD_STATE
+  hyprctl eval "hl.device({ name = '$MY_DEFAULT_TOUCHPAD', enabled = $new_state })"
 }
 
 if [[ $1 == init ]]; then
