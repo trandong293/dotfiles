@@ -94,7 +94,7 @@ hl.bind("SUPER + T", hl.dsp.exec_cmd(script_path .. "/color_pickers.sh"))
 
 -- others
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind("SUPER + C", hl.dsp.window.kill())
+hl.bind("SUPER + C", hl.dsp.window.close())
 hl.bind("SUPER + M", hl.dsp.exit())
 
 --------------------
