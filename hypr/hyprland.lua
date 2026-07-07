@@ -1,5 +1,5 @@
 local terminal = "alacritty"
-local file_manager = "nautilus"
+local file_manager = "dolphin"
 local app_launcher = "~/.config/rofi/launcher.sh"
 local browser = "firefox"
 local lock = "hyprlock"
@@ -11,9 +11,11 @@ local script_path = "~/.config/hypr/scripts"
 ------------
 
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
-hl.env("GTK_THEME", "adw-gtk3-dark")
-hl.env("XCURSOR_SIZE", "24")
+
+hl.env("HYPRCURSOR_THEME", "Adwaita")
 hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XCURSOR_THEME", "Adwaita")
+hl.env("XCURSOR_SIZE", "24")
 
 ----------------
 --- MONITORS ---
@@ -112,7 +114,7 @@ hl.window_rule({
 
 hl.window_rule({
   match = {
-    class = "org.gnome.Nautilus"
+    class = "org.kde.dolphin"
   },
   float = true,
   size = { 800, 600 },
@@ -126,12 +128,8 @@ hl.window_rule({
 hl.on("hyprland.start", function()
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("hypridle")
-  hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("fcitx5 --disable xcb")
   hl.exec_cmd(script_path .. "/touchpad.sh init")
-  -- gtk
-  hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
-  hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'")
 end)
 
 -----------------
