@@ -5,35 +5,26 @@ end
 set -U fish_greeting
 
 # pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME/bin:$PATH"
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
+fish_add_path "$PNPM_HOME/bin"
 
 # dotnet
-# - there is no way to modify installation dir of global tools using envvar
-# - fucking microsoft with stupid dotnet-install-scripts
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-set DOTNET_HOME "$HOME/.local/share/dotnet"
-export DOTNET_ROOT="$DOTNET_HOME/dotnet-current"
-set DOTNET_TOOL "$HOME/.dotnet/tools"
-export PATH="$DOTNET_ROOT:$DOTNET_TOOL:$PATH"
+set -gx DOTNET_CLI_TELEMETRY_OPTOUT 1 # stupid telemetry
+# used only when running apps via generated executables (apphost.exe), so local only is enough
+# https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-environment-variables#dotnet_root-dotnet_rootx86-dotnet_root_x86-dotnet_root_x64
+set -l DOTNET_ROOT "$HOME/.local/share/dotnet/dotnet-current"
+fish_add_path "$DOTNET_ROOT"
+set -l DOTNET_TOOL "$HOME/.local/share/dotnet/tools"
+fish_add_path "$DOTNET_TOOL"
 
 # uv 
-export UV_INSTALL_DIR="$HOME/.local/share/uv"
-export UV_TOOL_BIN_DIR="$UV_INSTALL_DIR/tools"
-export UV_PYTHON_BIN_DIR="$UV_INSTALL_DIR"
-export PATH="$UV_INSTALL_DIR:$UV_TOOL_BIN_DIR:$PATH"
+set -gx UV_INSTALL_DIR "$HOME/.local/share/uv"
+fish_add_path "$UV_INSTALL_DIR"
+set -gx UV_TOOL_BIN_DIR "$UV_INSTALL_DIR/tools"
+fish_add_path "$UV_TOOL_BIN_DIR"
+set -gx UV_PYTHON_BIN_DIR "$UV_INSTALL_DIR/python"
 
 # go
-set GO_HOME "$HOME/.local/share/golang"
-export GOROOT="$GO_HOME/go-current"
-export GOPATH="$GO_HOME/packages"
-export PATH="$GO_HOME:$GOROOT/bin:$PATH"
-
-# rust
-#export CARGO_HOME="$HOME/.cargo"
-#export PATH="$CARGO_HOME/bin:$PATH"
-
-# bun
-#export BUN_INSTALL="$HOME/.bun"
-#export PATH="$BUN_INSTALL/bin:$PATH"
-
+set -gx GOROOT "$HOME/.local/share/golang/go-current"
+fish_add_path "$GOROOT/bin"
+set -gx GOPATH "$HOME/.local/share/golang/go-current/packages"

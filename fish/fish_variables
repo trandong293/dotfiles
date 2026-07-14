@@ -2,3 +2,4 @@
 # VERSION: 3.0
 SETUVAR __fish_initialized:4300
 SETUVAR fish_greeting:\x1d
+SETUVAR fish_user_paths:/home/trand/\x2elocal/share/golang/go\x2dcurrent/bin\x1e/home/trand/\x2elocal/share/uv/tools\x1e/home/trand/\x2elocal/share/uv\x1e/home/trand/\x2elocal/share/dotnet/dotnet\x2dcurrent\x1e/home/trand/\x2elocal/share/pnpm/bin
