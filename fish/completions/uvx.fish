@@ -6,8 +6,8 @@ complete -c uvx -s c -l constraints -d 'Constrain versions using the given requi
 complete -c uvx -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
 complete -c uvx -l overrides -d 'Override versions using the given requirements files' -r -F
 complete -c uvx -l env-file -d 'Load environment variables from a `.env` file' -r -F
-complete -c uvx -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uvx -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uvx -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uvx -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uvx -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uvx -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uvx -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -24,9 +24,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uvx -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uvx -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uvx -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uvx -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -91,6 +92,7 @@ arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
 complete -c uvx -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
+cu132\t'Use the PyTorch index for CUDA 13.2'
 cu130\t'Use the PyTorch index for CUDA 13.0'
 cu129\t'Use the PyTorch index for CUDA 12.9'
 cu128\t'Use the PyTorch index for CUDA 12.8'

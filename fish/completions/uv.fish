@@ -346,8 +346,8 @@ complete -c uv -n "__fish_uv_using_subcommand run" -l env-file -d 'Load environm
 complete -c uv -n "__fish_uv_using_subcommand run" -s w -l with -d 'Run with the given packages installed' -r -f
 complete -c uv -n "__fish_uv_using_subcommand run" -l with-editable -d 'Run with the given packages installed in editable mode' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand run" -l with-requirements -d 'Run with the packages listed in the given files' -r -F
-complete -c uv -n "__fish_uv_using_subcommand run" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand run" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand run" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand run" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand run" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand run" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand run" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -364,9 +364,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand run" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand run" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand run" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand run" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -451,10 +452,10 @@ complete -c uv -n "__fish_uv_using_subcommand run" -l all-extras -d 'Include all
 complete -c uv -n "__fish_uv_using_subcommand run" -l no-all-extras
 complete -c uv -n "__fish_uv_using_subcommand run" -l dev -d 'Include the development dependency group [env: UV_DEV=]'
 complete -c uv -n "__fish_uv_using_subcommand run" -l no-dev -d 'Disable the development dependency group [env: UV_NO_DEV=]'
+complete -c uv -n "__fish_uv_using_subcommand run" -l only-dev -d 'Only include the development dependency group'
 complete -c uv -n "__fish_uv_using_subcommand run" -l no-default-groups -d 'Ignore the default dependency groups'
 complete -c uv -n "__fish_uv_using_subcommand run" -l all-groups -d 'Include dependencies from all dependency groups'
 complete -c uv -n "__fish_uv_using_subcommand run" -s m -l module -d 'Run a Python module'
-complete -c uv -n "__fish_uv_using_subcommand run" -l only-dev -d 'Only include the development dependency group'
 complete -c uv -n "__fish_uv_using_subcommand run" -l editable -d 'Install any non-editable dependencies, including the project and any workspace members, as editable'
 complete -c uv -n "__fish_uv_using_subcommand run" -l no-editable -d 'Install any editable dependencies, including the project and any workspace members, as non-editable [env: UV_NO_EDITABLE=]'
 complete -c uv -n "__fish_uv_using_subcommand run" -l inexact -d 'Do not remove extraneous packages present in the environment'
@@ -590,8 +591,8 @@ complete -c uv -n "__fish_uv_using_subcommand add" -l rev -d 'Commit to use when
 complete -c uv -n "__fish_uv_using_subcommand add" -l tag -d 'Tag to use when adding a dependency from Git' -r -f
 complete -c uv -n "__fish_uv_using_subcommand add" -l branch -d 'Branch to use when adding a dependency from Git' -r -f
 complete -c uv -n "__fish_uv_using_subcommand add" -l extra -d 'Extras to enable for the dependency' -r -f
-complete -c uv -n "__fish_uv_using_subcommand add" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand add" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand add" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand add" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand add" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand add" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand add" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -608,9 +609,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand add" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand add" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand add" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand add" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -706,8 +708,8 @@ complete -c uv -n "__fish_uv_using_subcommand add" -l no-config -d 'Avoid discov
 complete -c uv -n "__fish_uv_using_subcommand add" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand remove" -l optional -d 'Remove the packages from the project\'s optional dependencies for the specified extra' -r -f
 complete -c uv -n "__fish_uv_using_subcommand remove" -l group -d 'Remove the packages from the specified dependency group' -r -f
-complete -c uv -n "__fish_uv_using_subcommand remove" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand remove" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand remove" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand remove" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand remove" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand remove" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand remove" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -724,9 +726,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand remove" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand remove" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand remove" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand remove" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -817,8 +820,8 @@ post\t'Increase the post version (e.g., 1.2.3.post5 => 1.2.3.post6)'
 dev\t'Increase the dev version (e.g., 1.2.3a4.dev6 => 1.2.3.dev7)'"
 complete -c uv -n "__fish_uv_using_subcommand version" -l output-format -d 'The format of the output' -r -f -a "text\t'Display the version as plain text'
 json\t'Display the version as JSON'"
-complete -c uv -n "__fish_uv_using_subcommand version" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand version" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand version" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand version" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand version" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand version" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand version" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -835,9 +838,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand version" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand version" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand version" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand version" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -927,8 +931,8 @@ complete -c uv -n "__fish_uv_using_subcommand sync" -l only-group -d 'Only inclu
 complete -c uv -n "__fish_uv_using_subcommand sync" -l no-editable-package -d 'Install the specified editable packages as non-editable' -r -f
 complete -c uv -n "__fish_uv_using_subcommand sync" -l no-install-package -d 'Do not install the given package(s)' -r -f
 complete -c uv -n "__fish_uv_using_subcommand sync" -l only-install-package -d 'Only install the given package(s)' -r -f
-complete -c uv -n "__fish_uv_using_subcommand sync" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand sync" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand sync" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand sync" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand sync" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand sync" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand sync" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -945,9 +949,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand sync" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand sync" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand sync" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand sync" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -1093,8 +1098,8 @@ complete -c uv -n "__fish_uv_using_subcommand sync" -l no-installer-metadata -d 
 complete -c uv -n "__fish_uv_using_subcommand sync" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand sync" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand lock" -l script -d 'Lock the specified Python script, rather than the current project' -r -F
-complete -c uv -n "__fish_uv_using_subcommand lock" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand lock" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand lock" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand lock" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand lock" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand lock" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand lock" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -1110,16 +1115,17 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand lock" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand lock" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand lock" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand lock" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand lock" -l config-settings-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand lock" -l no-build-isolation-package -d 'Disable isolation when building source distributions for a specific package' -r -f
-complete -c uv -n "__fish_uv_using_subcommand lock" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand lock" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand lock" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand lock" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand lock" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -1184,6 +1190,7 @@ complete -c uv -n "__fish_uv_using_subcommand lock" -l no-progress -d 'Hide all 
 complete -c uv -n "__fish_uv_using_subcommand lock" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand lock" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand lock" -s h -l help -d 'Display the concise help for this command'
+complete -c uv -n "__fish_uv_using_subcommand upgrade" -l exclude -d 'Exclude the named package from upgrades' -r -f
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand upgrade" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -1229,15 +1236,15 @@ complete -c uv -n "__fish_uv_using_subcommand export" -l package -d 'Export the 
 complete -c uv -n "__fish_uv_using_subcommand export" -l prune -d 'Prune the given package from the dependency tree' -r
 complete -c uv -n "__fish_uv_using_subcommand export" -l extra -d 'Include optional dependencies from the specified extra name' -r
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-extra -d 'Exclude the specified optional dependencies, if `--all-extras` is supplied' -r
-complete -c uv -n "__fish_uv_using_subcommand export" -l group -d 'Include dependencies from the specified dependency group' -r
-complete -c uv -n "__fish_uv_using_subcommand export" -l no-group -d 'Disable the specified dependency group [env: `UV_NO_GROUP`=]' -r
-complete -c uv -n "__fish_uv_using_subcommand export" -l only-group -d 'Only include dependencies from the specified dependency group' -r
+complete -c uv -n "__fish_uv_using_subcommand export" -l group -d 'Include dependencies from the specified dependency group' -r -f
+complete -c uv -n "__fish_uv_using_subcommand export" -l no-group -d 'Disable the specified dependency group [env: `UV_NO_GROUP`=]' -r -f
+complete -c uv -n "__fish_uv_using_subcommand export" -l only-group -d 'Only include dependencies from the specified dependency group' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-editable-package -d 'Export the specified editable packages as non-editable' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -s o -l output-file -d 'Write the exported requirements to the given file' -r -F
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-emit-package -d 'Do not emit the given package(s)' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -l only-emit-package -d 'Only emit the given package(s)' -r -f
-complete -c uv -n "__fish_uv_using_subcommand export" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand export" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand export" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand export" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand export" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand export" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand export" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -1253,16 +1260,17 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand export" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand export" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand export" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand export" -l config-settings-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-build-isolation-package -d 'Disable isolation when building source distributions for a specific package' -r -f
-complete -c uv -n "__fish_uv_using_subcommand export" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand export" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand export" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand export" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand export" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -1352,16 +1360,18 @@ complete -c uv -n "__fish_uv_using_subcommand export" -l no-progress -d 'Hide al
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand export" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand export" -s h -l help -d 'Display the concise help for this command'
+complete -c uv -n "__fish_uv_using_subcommand tree" -l format -d 'The format in which to display the dependency graph' -r -f -a "text\t'Display the dependency graph as a human-readable tree'
+json\t'Display the dependency graph as JSON'"
 complete -c uv -n "__fish_uv_using_subcommand tree" -s d -l depth -d 'Maximum display depth of the dependency tree' -r
 complete -c uv -n "__fish_uv_using_subcommand tree" -l prune -d 'Prune the given package from the display of the dependency tree' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tree" -l package -d 'Display only the specified packages' -r -f
-complete -c uv -n "__fish_uv_using_subcommand tree" -l group -d 'Include dependencies from the specified dependency group' -r
-complete -c uv -n "__fish_uv_using_subcommand tree" -l no-group -d 'Disable the specified dependency group [env: `UV_NO_GROUP`=]' -r
-complete -c uv -n "__fish_uv_using_subcommand tree" -l only-group -d 'Only include dependencies from the specified dependency group' -r
+complete -c uv -n "__fish_uv_using_subcommand tree" -l group -d 'Include dependencies from the specified dependency group' -r -f
+complete -c uv -n "__fish_uv_using_subcommand tree" -l no-group -d 'Disable the specified dependency group [env: `UV_NO_GROUP`=]' -r -f
+complete -c uv -n "__fish_uv_using_subcommand tree" -l only-group -d 'Only include dependencies from the specified dependency group' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-build-package -d 'Don\'t build source distributions for a specific package [env: `UV_NO_BUILD_PACKAGE`=]' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-binary-package -d 'Don\'t install pre-built wheels for a specific package [env: `UV_NO_BINARY_PACKAGE`=]' -r -f
-complete -c uv -n "__fish_uv_using_subcommand tree" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand tree" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand tree" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand tree" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tree" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tree" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand tree" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -1377,16 +1387,17 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand tree" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand tree" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tree" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand tree" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand tree" -l config-settings-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-build-isolation-package -d 'Disable isolation when building source distributions for a specific package' -r -f
-complete -c uv -n "__fish_uv_using_subcommand tree" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand tree" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand tree" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand tree" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tree" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -1463,8 +1474,8 @@ complete -c uv -n "__fish_uv_using_subcommand tree" -l invert -d 'Show the rever
 complete -c uv -n "__fish_uv_using_subcommand tree" -l outdated -d 'Show the latest available version of each package in the tree'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l show-sizes -d 'Show compressed wheel sizes for packages in the tree'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l dev -d 'Include the development dependency group [env: UV_DEV=]'
-complete -c uv -n "__fish_uv_using_subcommand tree" -l only-dev -d 'Only include the development dependency group'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-dev -d 'Disable the development dependency group [env: UV_NO_DEV=]'
+complete -c uv -n "__fish_uv_using_subcommand tree" -l only-dev -d 'Only include the development dependency group'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-default-groups -d 'Ignore the default dependency groups'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l all-groups -d 'Include dependencies from all dependency groups'
 complete -c uv -n "__fish_uv_using_subcommand tree" -l locked -d 'Assert that the `uv.lock` will remain unchanged [env: UV_LOCKED=]'
@@ -1503,7 +1514,7 @@ complete -c uv -n "__fish_uv_using_subcommand tree" -l no-installer-metadata -d 
 complete -c uv -n "__fish_uv_using_subcommand tree" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand tree" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand format" -l version -d 'The version of Ruff to use for formatting' -r -f
-complete -c uv -n "__fish_uv_using_subcommand format" -l exclude-newer -d 'Limit candidate Ruff versions to those released prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand format" -l exclude-newer -d 'Limit candidate Ruff versions to those released prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand format" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand format" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -1546,6 +1557,7 @@ complete -c uv -n "__fish_uv_using_subcommand format" -l no-progress -d 'Hide al
 complete -c uv -n "__fish_uv_using_subcommand format" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand format" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand format" -s h -l help -d 'Display the concise help for this command'
+complete -c uv -n "__fish_uv_using_subcommand check" -l package -d 'Check specific packages in the workspace' -r -f
 complete -c uv -n "__fish_uv_using_subcommand check" -l script -d 'Run checks for the specified PEP 723 Python script, rather than the current project' -r -F
 complete -c uv -n "__fish_uv_using_subcommand check" -l extra -d 'Include optional dependencies from the specified extra name' -r -f
 complete -c uv -n "__fish_uv_using_subcommand check" -l no-extra -d 'Exclude the specified optional dependencies, if `--all-extras` is supplied' -r -f
@@ -1554,8 +1566,8 @@ complete -c uv -n "__fish_uv_using_subcommand check" -l no-group -d 'Disable the
 complete -c uv -n "__fish_uv_using_subcommand check" -l only-group -d 'Only include dependencies from the specified dependency group' -r -f
 complete -c uv -n "__fish_uv_using_subcommand check" -s p -l python -d 'The Python interpreter to use for the project environment' -r -f
 complete -c uv -n "__fish_uv_using_subcommand check" -l ty-version -d 'The version of ty to use for type checking' -r -f
-complete -c uv -n "__fish_uv_using_subcommand check" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand check" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand check" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand check" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand check" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand check" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand check" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -1572,9 +1584,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand check" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand check" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand check" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand check" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -1606,6 +1619,8 @@ complete -c uv -n "__fish_uv_using_subcommand check" -l preview-features -d 'Ena
 complete -c uv -n "__fish_uv_using_subcommand check" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand check" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand check" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
+complete -c uv -n "__fish_uv_using_subcommand check" -l fix -d 'Apply safe fixes to resolve type-checking errors'
+complete -c uv -n "__fish_uv_using_subcommand check" -l all-packages -d 'Check all packages in the workspace'
 complete -c uv -n "__fish_uv_using_subcommand check" -l all-extras -d 'Include all optional dependencies'
 complete -c uv -n "__fish_uv_using_subcommand check" -l no-all-extras
 complete -c uv -n "__fish_uv_using_subcommand check" -l dev -d 'Include the development dependency group [env: UV_DEV=]'
@@ -1616,8 +1631,10 @@ complete -c uv -n "__fish_uv_using_subcommand check" -l all-groups -d 'Include d
 complete -c uv -n "__fish_uv_using_subcommand check" -l locked -d 'Assert that the `uv.lock` will remain unchanged [env: UV_LOCKED=]'
 complete -c uv -n "__fish_uv_using_subcommand check" -l frozen -d 'Sync without updating the `uv.lock` file [env: UV_FROZEN=]'
 complete -c uv -n "__fish_uv_using_subcommand check" -l no-sync -d 'Avoid syncing the virtual environment [env: UV_NO_SYNC=]'
+complete -c uv -n "__fish_uv_using_subcommand check" -l no-install-project -d 'Do not install the current project [env: UV_NO_INSTALL_PROJECT=]'
 complete -c uv -n "__fish_uv_using_subcommand check" -l isolated -d 'Run checks without mutating project state [env: UV_ISOLATED=]'
 complete -c uv -n "__fish_uv_using_subcommand check" -l show-version -d 'Display the version of ty that will be used for type checking'
+complete -c uv -n "__fish_uv_using_subcommand check" -l show-command -d 'Display the ty command that will be used for type checking'
 complete -c uv -n "__fish_uv_using_subcommand check" -l no-project -d 'Avoid discovering a project or workspace'
 complete -c uv -n "__fish_uv_using_subcommand check" -l no-index -d 'Ignore the registry index (e.g., PyPI), instead relying on direct URL dependencies and those provided via `--find-links`'
 complete -c uv -n "__fish_uv_using_subcommand check" -s U -l upgrade -d 'Allow package upgrades, ignoring pinned versions in any existing output file. Implies `--refresh`'
@@ -1663,10 +1680,14 @@ complete -c uv -n "__fish_uv_using_subcommand audit" -l only-group -d 'Only audi
 complete -c uv -n "__fish_uv_using_subcommand audit" -l output-format -d 'Select the output format' -r -f -a "text\t'Display the result in a human-readable format'
 json\t'Display the result in JSON format'
 sarif\t'Display the result in SARIF format'"
+complete -c uv -n "__fish_uv_using_subcommand audit" -l ignore -d 'Ignore a vulnerability by ID' -r
+complete -c uv -n "__fish_uv_using_subcommand audit" -l ignore-until-fixed -d 'Ignore a vulnerability by ID, but only while no fix is available' -r
+complete -c uv -n "__fish_uv_using_subcommand audit" -l service-format -d 'The service format to use for vulnerability lookups' -r -f -a "osv\t''"
+complete -c uv -n "__fish_uv_using_subcommand audit" -l service-url -d 'The URL to vulnerability service API endpoint' -r -f
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-build-package -d 'Don\'t build source distributions for a specific package [env: `UV_NO_BUILD_PACKAGE`=]' -r -f
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-binary-package -d 'Don\'t install pre-built wheels for a specific package [env: `UV_NO_BINARY_PACKAGE`=]' -r -f
-complete -c uv -n "__fish_uv_using_subcommand audit" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand audit" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand audit" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand audit" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand audit" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand audit" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand audit" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -1682,16 +1703,17 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand audit" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand audit" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand audit" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand audit" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand audit" -l config-settings-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-build-isolation-package -d 'Disable isolation when building source distributions for a specific package' -r -f
-complete -c uv -n "__fish_uv_using_subcommand audit" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand audit" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand audit" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand audit" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand audit" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -1745,10 +1767,6 @@ wasm32-pyodide2025\t'A wasm32 target using the Pyodide 2025 platform. Meant for 
 arm64-apple-ios\t'An ARM64 target for iOS device'
 arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
-complete -c uv -n "__fish_uv_using_subcommand audit" -l ignore -d 'Ignore a vulnerability by ID' -r
-complete -c uv -n "__fish_uv_using_subcommand audit" -l ignore-until-fixed -d 'Ignore a vulnerability by ID, but only while no fix is available' -r
-complete -c uv -n "__fish_uv_using_subcommand audit" -l service-format -d 'The service format to use for vulnerability lookups' -r -f -a "osv\t''"
-complete -c uv -n "__fish_uv_using_subcommand audit" -l service-url -d 'The URL to vulnerability service API endpoint' -r -f
 complete -c uv -n "__fish_uv_using_subcommand audit" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand audit" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -1803,52 +1821,53 @@ complete -c uv -n "__fish_uv_using_subcommand audit" -l no-progress -d 'Hide all
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand audit" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand audit" -s h -l help -d 'Display the concise help for this command'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
 only-system\t'Only use system Python installations; never use managed Python installations'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
 manual\t'Do not automatically download managed Python installations; require explicit installation'
 never\t'Do not ever allow Python downloads'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
 always\t'Enables colored output regardless of the detected environment'
 never\t'Disables colored output'"
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l allow-insecure-host -d 'Allow insecure connections to a host' -r -f
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l preview-features -d 'Enable experimental preview features' -r
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l managed-python -d 'Require use of uv-managed Python versions [env: UV_MANAGED_PYTHON=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-managed-python -d 'Disable use of uv-managed Python versions [env: UV_NO_MANAGED_PYTHON=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l allow-python-downloads -d 'Allow automatically downloading Python when required. [env: "UV_PYTHON_DOWNLOADS=auto"]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-python-downloads -d 'Disable automatic downloads of Python. [env: "UV_PYTHON_DOWNLOADS=never"]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -s q -l quiet -d 'Use quiet output'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -s v -l verbose -d 'Use verbose output'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-color -d 'Disable colors'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l native-tls -d '(Deprecated: use `--system-certs` instead.) Whether to load TLS certificates from the platform\'s native certificate store [env: UV_NATIVE_TLS=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-native-tls
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l system-certs -d 'Whether to load TLS certificates from the platform\'s native certificate store [env: UV_SYSTEM_CERTS=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-system-certs
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l offline -d 'Disable network access [env: UV_OFFLINE=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-offline
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l preview -d 'Whether to enable all experimental preview features [env: UV_PREVIEW=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-preview
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l isolated -d 'Avoid discovering a `pyproject.toml` or `uv.toml` file [env: UV_ISOLATED=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l show-settings -d 'Show the resolved settings for the current command'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-progress -d 'Hide all progress outputs [env: UV_NO_PROGRESS=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -s h -l help -d 'Display the concise help for this command'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -f -a "run" -d 'Run a command provided by a Python package'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -f -a "uvx" -d 'Run a command provided by a Python package.'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -f -a "install" -d 'Install commands provided by a Python package'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -f -a "upgrade" -d 'Upgrade installed tools'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -f -a "list" -d 'List installed tools'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -f -a "uninstall" -d 'Uninstall a tool'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -f -a "update-shell" -d 'Ensure that the tool executable directory is on the `PATH`'
-complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list uninstall update-shell dir" -f -a "dir" -d 'Show the path to the uv tools directory'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l allow-insecure-host -d 'Allow insecure connections to a host' -r -f
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l preview-features -d 'Enable experimental preview features' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l managed-python -d 'Require use of uv-managed Python versions [env: UV_MANAGED_PYTHON=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-managed-python -d 'Disable use of uv-managed Python versions [env: UV_NO_MANAGED_PYTHON=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l allow-python-downloads -d 'Allow automatically downloading Python when required. [env: "UV_PYTHON_DOWNLOADS=auto"]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-python-downloads -d 'Disable automatic downloads of Python. [env: "UV_PYTHON_DOWNLOADS=never"]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -s q -l quiet -d 'Use quiet output'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -s v -l verbose -d 'Use verbose output'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-color -d 'Disable colors'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l native-tls -d '(Deprecated: use `--system-certs` instead.) Whether to load TLS certificates from the platform\'s native certificate store [env: UV_NATIVE_TLS=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-native-tls
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l system-certs -d 'Whether to load TLS certificates from the platform\'s native certificate store [env: UV_SYSTEM_CERTS=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-system-certs
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l offline -d 'Disable network access [env: UV_OFFLINE=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-offline
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l preview -d 'Whether to enable all experimental preview features [env: UV_PREVIEW=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-preview
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l isolated -d 'Avoid discovering a `pyproject.toml` or `uv.toml` file [env: UV_ISOLATED=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l show-settings -d 'Show the resolved settings for the current command'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-progress -d 'Hide all progress outputs [env: UV_NO_PROGRESS=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -s h -l help -d 'Display the concise help for this command'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "run" -d 'Run a command provided by a Python package'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "uvx" -d 'Run a command provided by a Python package.'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "install" -d 'Install commands provided by a Python package'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "upgrade" -d 'Upgrade installed tools'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "list" -d 'List installed tools'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "audit" -d 'Audit installed tools and their dependencies'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "uninstall" -d 'Uninstall a tool'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "update-shell" -d 'Ensure that the tool executable directory is on the `PATH`'
+complete -c uv -n "__fish_uv_using_subcommand tool; and not __fish_seen_subcommand_from run uvx install upgrade list audit uninstall update-shell dir" -f -a "dir" -d 'Show the path to the uv tools directory'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l from -d 'Use the given package to provide the command' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s w -l with -d 'Run with the given packages installed' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l with-editable -d 'Run with the given packages installed in editable mode' -r -f -a "(__fish_complete_directories)"
@@ -1857,8 +1876,8 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l overrides -d 'Override versions using the given requirements files' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l env-file -d 'Load environment variables from a `.env` file' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -1875,9 +1894,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -1942,6 +1962,7 @@ arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from run" -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
+cu132\t'Use the PyTorch index for CUDA 13.2'
 cu130\t'Use the PyTorch index for CUDA 13.0'
 cu129\t'Use the PyTorch index for CUDA 12.9'
 cu128\t'Use the PyTorch index for CUDA 12.8'
@@ -2061,8 +2082,8 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l overrides -d 'Override versions using the given requirements files' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l env-file -d 'Load environment variables from a `.env` file' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -2079,9 +2100,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -2146,6 +2168,7 @@ arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uvx" -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
+cu132\t'Use the PyTorch index for CUDA 13.2'
 cu130\t'Use the PyTorch index for CUDA 13.0'
 cu129\t'Use the PyTorch index for CUDA 12.9'
 cu128\t'Use the PyTorch index for CUDA 12.8'
@@ -2267,8 +2290,8 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l overrides -d 'Override versions using the given requirements files' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l excludes -d 'Exclude packages from resolution using the given requirements files' -r -F
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -2285,9 +2308,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -2352,6 +2376,7 @@ arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from install" -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
+cu132\t'Use the PyTorch index for CUDA 13.2'
 cu130\t'Use the PyTorch index for CUDA 13.0'
 cu129\t'Use the PyTorch index for CUDA 12.9'
 cu128\t'Use the PyTorch index for CUDA 12.8'
@@ -2506,8 +2531,8 @@ arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -s P -l upgrade-package -d 'Allow upgrades for a specific package, ignoring pinned versions in any existing output file. Implies `--refresh-package`' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l upgrade-group -d 'Allow upgrades for all packages in a dependency group, ignoring pinned versions in any existing output file' -r
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -2522,16 +2547,17 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l config-setting-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l no-build-isolation-package -d 'Disable isolation when building source distributions for a specific package' -r -f
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -2592,7 +2618,8 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from upgrade" -s h -l help -d 'Display the concise help for this command'
-complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
 system\t'Prefer system Python installations over managed Python installations'
@@ -2638,6 +2665,52 @@ complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_f
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from list" -s h -l help -d 'Display the concise help for this command'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l output-format -d 'Select the output format' -r -f -a "text\t'Display the result in a human-readable format'
+json\t'Display the result in JSON format'
+sarif\t'Display the result in SARIF format'"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l ignore -d 'Ignore a vulnerability by ID' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l ignore-until-fixed -d 'Ignore a vulnerability by ID, but only while no fix is available' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l service-format -d 'The service format to use for vulnerability lookups' -r -f -a "osv\t''"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l service-url -d 'The URL to vulnerability service API endpoint' -r -f
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
+managed\t'Prefer managed Python installations over system Python installations'
+system\t'Prefer system Python installations over managed Python installations'
+only-system\t'Only use system Python installations; never use managed Python installations'"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l python-fetch -d 'Deprecated version of [`Self::python_downloads`]' -r -f -a "automatic\t'Automatically download managed Python installations when needed'
+manual\t'Do not automatically download managed Python installations; require explicit installation'
+never\t'Do not ever allow Python downloads'"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l color -d 'Control the use of color in output' -r -f -a "auto\t'Enables colored output only when the output is going to a terminal or TTY with support'
+always\t'Enables colored output regardless of the detected environment'
+never\t'Disables colored output'"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l allow-insecure-host -d 'Allow insecure connections to a host' -r -f
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l preview-features -d 'Enable experimental preview features' -r
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l all -d 'Audit all installed tools'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l managed-python -d 'Require use of uv-managed Python versions [env: UV_MANAGED_PYTHON=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-managed-python -d 'Disable use of uv-managed Python versions [env: UV_NO_MANAGED_PYTHON=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l allow-python-downloads -d 'Allow automatically downloading Python when required. [env: "UV_PYTHON_DOWNLOADS=auto"]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-python-downloads -d 'Disable automatic downloads of Python. [env: "UV_PYTHON_DOWNLOADS=never"]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -s q -l quiet -d 'Use quiet output'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -s v -l verbose -d 'Use verbose output'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-color -d 'Disable colors'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l native-tls -d '(Deprecated: use `--system-certs` instead.) Whether to load TLS certificates from the platform\'s native certificate store [env: UV_NATIVE_TLS=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-native-tls
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l system-certs -d 'Whether to load TLS certificates from the platform\'s native certificate store [env: UV_SYSTEM_CERTS=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-system-certs
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l offline -d 'Disable network access [env: UV_OFFLINE=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-offline
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l preview -d 'Whether to enable all experimental preview features [env: UV_PREVIEW=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-preview
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l isolated -d 'Avoid discovering a `pyproject.toml` or `uv.toml` file [env: UV_ISOLATED=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l show-settings -d 'Show the resolved settings for the current command'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-progress -d 'Hide all progress outputs [env: UV_NO_PROGRESS=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
+complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from audit" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uninstall" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand tool; and __fish_seen_subcommand_from uninstall" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -3150,6 +3223,7 @@ complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from update-shell" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from update-shell" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand python; and __fish_seen_subcommand_from update-shell" -s h -l help -d 'Display the concise help for this command'
+complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and not __fish_seen_subcommand_from compile sync install uninstall freeze list show tree check debug" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -3204,8 +3278,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l extra -d 'Include optional dependencies from the specified extra name; may be provided more than once' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l group -d 'Install the specified dependency group from a `pyproject.toml`' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -3221,16 +3295,17 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l config-settings-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l no-build-isolation-package -d 'Disable isolation when building source distributions for a specific package' -r -f
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -3296,6 +3371,7 @@ x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l no-emit-package -d 'Specify a package to omit from the output resolution. Its dependencies will still be included in the resolution. Equivalent to pip-compile\'s `--unsafe-package` option' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
+cu132\t'Use the PyTorch index for CUDA 13.2'
 cu130\t'Use the PyTorch index for CUDA 13.0'
 cu129\t'Use the PyTorch index for CUDA 12.9'
 cu128\t'Use the PyTorch index for CUDA 12.8'
@@ -3346,10 +3422,10 @@ xpu\t'Use the PyTorch index for Intel XPU'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l resolver -r -f -a "backtracking\t''
 legacy\t''"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l max-rounds -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l cert -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l client-cert -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l config -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l pip-args -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from compile" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -3439,8 +3515,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l extra -d 'Include optional dependencies from the specified extra name; may be provided more than once' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l group -d 'Install the specified dependency group from a `pylock.toml` or `pyproject.toml`' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -3452,8 +3528,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 subprocess\t'Use the `keyring` command for credential lookup'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l config-settings-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -3514,6 +3590,7 @@ arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
+cu132\t'Use the PyTorch index for CUDA 13.2'
 cu130\t'Use the PyTorch index for CUDA 13.0'
 cu129\t'Use the PyTorch index for CUDA 12.9'
 cu128\t'Use the PyTorch index for CUDA 12.8'
@@ -3562,10 +3639,10 @@ rocm4.1\t'Use the PyTorch index for ROCm 4.1'
 rocm4.0.1\t'Use the PyTorch index for ROCm 4.0.1'
 xpu\t'Use the PyTorch index for Intel XPU'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l python-executable -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l cert -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l client-cert -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l config -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l pip-args -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from sync" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -3642,8 +3719,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building source distributions' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l extra -d 'Include optional dependencies from the specified extra name; may be provided more than once' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l group -d 'Install the specified dependency group from a `pylock.toml` or `pyproject.toml`' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -3660,9 +3737,10 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r -f
@@ -3730,6 +3808,7 @@ arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l torch-backend -d 'The backend to use when fetching packages in the PyTorch ecosystem (e.g., `cpu`, `cu126`, or `auto`)' -r -f -a "auto\t'Select the appropriate PyTorch index based on the operating system and CUDA driver version'
 cpu\t'Use the CPU-only PyTorch index'
+cu132\t'Use the PyTorch index for CUDA 13.2'
 cu130\t'Use the PyTorch index for CUDA 13.0'
 cu129\t'Use the PyTorch index for CUDA 12.9'
 cu128\t'Use the PyTorch index for CUDA 12.8'
@@ -3777,6 +3856,7 @@ rocm4.2\t'Use the PyTorch index for ROCm 4.2'
 rocm4.1\t'Use the PyTorch index for ROCm 4.1'
 rocm4.0.1\t'Use the PyTorch index for ROCm 4.0.1'
 xpu\t'Use the PyTorch index for Intel XPU'"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from install" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -3856,6 +3936,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 subprocess\t'Use the `keyring` command for credential lookup'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from uninstall" -s t -l target -d 'Uninstall packages from the specified `--target` directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from uninstall" -l prefix -d 'Uninstall packages from the specified `--prefix` directory' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from uninstall" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from uninstall" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from uninstall" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -3906,6 +3987,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -l path -d 'Restrict to the specified installation path for listing packages (can be used multiple times)' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -s t -l target -d 'List packages from the specified `--target` directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -l prefix -d 'List packages from the specified `--prefix` directory' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from freeze" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -3954,8 +4036,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l format -d 'Select the output format' -r -f -a "columns\t'Display the list of packages in a human-readable table'
 freeze\t'Display the list of packages in a `pip freeze`-like format, with one package per line alongside its version'
 json\t'Display the list of packages in a machine-readable JSON format'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -3964,10 +4046,12 @@ unsafe-first-match\t'Search for every package name across all indexes, exhaustin
 unsafe-best-match\t'Search for every package name across all indexes, preferring the "best" version found. If a package version is in multiple indexes, only look at the entry for the first index'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l keyring-provider -d 'Attempt to use `keyring` for authentication for index URLs' -r -f -a "disabled\t'Do not use keyring for credential lookup'
 subprocess\t'Use the `keyring` command for credential lookup'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -s p -l python -d 'The Python interpreter for which packages should be listed.' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -s t -l target -d 'List packages from the specified `--target` directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l prefix -d 'List packages from the specified `--prefix` directory' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from list" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -4019,6 +4103,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -s p -l python -d 'The Python interpreter to find the package in.' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -s t -l target -d 'Show a package from the specified `--target` directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -l prefix -d 'Show a package from the specified `--prefix` directory' -r -f -a "(__fish_complete_directories)"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from show" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -4066,8 +4151,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -s d -l depth -d 'Maximum display depth of the dependency tree' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l prune -d 'Prune the given package from the display of the dependency tree' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l package -d 'Display only the specified packages' -r -f
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -4076,8 +4161,10 @@ unsafe-first-match\t'Search for every package name across all indexes, exhaustin
 unsafe-best-match\t'Search for every package name across all indexes, preferring the "best" version found. If a package version is in multiple indexes, only look at the entry for the first index'"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l keyring-provider -d 'Attempt to use `keyring` for authentication for index URLs' -r -f -a "disabled\t'Do not use keyring for credential lookup'
 subprocess\t'Use the `keyring` command for credential lookup'"
-complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -s p -l python -d 'The Python interpreter for which packages should be listed.' -r -f
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from tree" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -4175,6 +4262,7 @@ wasm32-pyodide2025\t'A wasm32 target using the Pyodide 2025 platform. Meant for 
 arm64-apple-ios\t'An ARM64 target for iOS device'
 arm64-apple-ios-simulator\t'An ARM64 target for iOS simulator'
 x86_64-apple-ios-simulator\t'An `x86_64` target for iOS simulator'"
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from check" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from check" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from check" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -4219,6 +4307,7 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l python-version -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l implementation -r
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l abi -r
+complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l cert -d 'Path to a PEM-encoded CA certificate bundle' -r -F
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -4259,8 +4348,8 @@ complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_fr
 complete -c uv -n "__fish_uv_using_subcommand pip; and __fish_seen_subcommand_from debug" -s h -l help -d 'Display the concise help for this command'
 complete -c uv -n "__fish_uv_using_subcommand venv" -s p -l python -d 'The Python interpreter to use for the virtual environment.' -r -f
 complete -c uv -n "__fish_uv_using_subcommand venv" -l prompt -d 'Provide an alternative prompt prefix for the virtual environment.' -r -f
-complete -c uv -n "__fish_uv_using_subcommand venv" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand venv" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand venv" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand venv" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand venv" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand venv" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand venv" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -4269,8 +4358,8 @@ unsafe-first-match\t'Search for every package name across all indexes, exhaustin
 unsafe-best-match\t'Search for every package name across all indexes, preferring the "best" version found. If a package version is in multiple indexes, only look at the entry for the first index'"
 complete -c uv -n "__fish_uv_using_subcommand venv" -l keyring-provider -d 'Attempt to use `keyring` for authentication for index URLs' -r -f -a "disabled\t'Do not use keyring for credential lookup'
 subprocess\t'Use the `keyring` command for credential lookup'"
-complete -c uv -n "__fish_uv_using_subcommand venv" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand venv" -l exclude-newer-package -d 'Limit candidate packages for a specific package to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand venv" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand venv" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand venv" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -4336,8 +4425,8 @@ complete -c uv -n "__fish_uv_using_subcommand build" -l package -d 'Build a spec
 complete -c uv -n "__fish_uv_using_subcommand build" -s o -l out-dir -d 'The output directory to which distributions should be written' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand build" -s b -l build-constraints -d 'Constrain build dependencies using the given requirements files when building distributions' -r -F
 complete -c uv -n "__fish_uv_using_subcommand build" -s p -l python -d 'The Python interpreter to use for the build environment.' -r -f
-complete -c uv -n "__fish_uv_using_subcommand build" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand build" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand build" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand build" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand build" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand build" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand build" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -4353,16 +4442,17 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand build" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand build" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand build" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand build" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand build" -l config-settings-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand build" -l no-build-isolation-package -d 'Disable isolation when building source distributions for a specific package' -r -f
-complete -c uv -n "__fish_uv_using_subcommand build" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand build" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand build" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand build" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand build" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -4531,8 +4621,8 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_sub
 complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_subcommand_from metadata dir list" -f -a "dir" -d 'Display the path of a workspace member'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and not __fish_seen_subcommand_from metadata dir list" -f -a "list" -d 'List the members of a workspace'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l script -d 'View metadata for the specified PEP 723 Python script, rather than the current workspace' -r -F
-complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l index -d 'The URLs to use when resolving dependencies, in addition to the default index' -r
-complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l default-index -d 'The URL of the default package index (by default: <https://pypi.org/simple>)' -r
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l index -d 'The indexes to use when resolving dependencies, in addition to the default index' -r
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l default-index -d 'The default package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -s i -l index-url -d '(Deprecated: use `--default-index` instead) The URL of the Python package index (by default: <https://pypi.org/simple>)' -r
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l extra-index-url -d '(Deprecated: use `--index` instead) Extra URLs of package indexes to use, in addition to `--index-url`' -r
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -s f -l find-links -d 'Locations to search for candidate distributions, in addition to those found in the registry indexes' -r
@@ -4548,16 +4638,17 @@ lowest\t'Resolve the lowest compatible version of each package'
 lowest-direct\t'Resolve the lowest compatible version of any direct dependencies, and the highest compatible version of any transitive dependencies'"
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l prerelease -d 'The strategy to use when considering pre-release versions' -r -f -a "disallow\t'Disallow all pre-release versions'
 allow\t'Allow all pre-release versions'
-if-necessary\t'Allow pre-release versions if all versions of a package are pre-release'
-explicit\t'Allow pre-release versions for first-party packages with explicit pre-release markers in their version requirements'
-if-necessary-or-explicit\t'Allow pre-release versions if all versions of a package are pre-release, or if the package has an explicit pre-release marker in its version requirements'"
+if-necessary\t'Prefer stable versions, falling back to pre-release versions when necessary'
+explicit\t'Prefer stable versions for first-party packages with explicit pre-release specifiers, falling back to pre-release versions when necessary. Disallow pre-release versions for all other packages'
+if-necessary-or-explicit\t'Deprecated alias for `if-necessary`'"
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l prerelease-package -d 'The strategy to use when considering pre-release versions for a specific package' -r -f
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l fork-strategy -d 'The strategy to use when selecting multiple versions of a given package across Python versions and platforms' -r -f -a "fewest\t'Optimize for selecting the fewest number of versions for each package. Older versions may be preferred if they are compatible with a wider range of supported Python versions or platforms'
 requires-python\t'Optimize for selecting latest supported version of each package, for each supported Python version'"
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -s C -l config-setting -d 'Settings to pass to the PEP 517 build backend, specified as `KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l config-settings-package -d 'Settings to pass to the PEP 517 build backend for a specific package, specified as `PACKAGE:KEY=VALUE` pairs' -r
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-build-isolation-package -d 'Disable isolation when building source distributions for a specific package' -r -f
-complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r
-complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l exclude-newer -d 'Limit candidate packages to those that were uploaded prior to the given date' -r -f
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l exclude-newer-package -d 'Limit candidate packages for specific packages to those that were uploaded prior to the given date' -r -f
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l link-mode -d 'The method to use when installing packages from the global cache' -r -f -a "clone\t'Clone (i.e., copy-on-write) packages from the source into the destination'
 copy\t'Copy packages from the source into the destination'
 hardlink\t'Hard link packages from the source into the destination'
@@ -4600,6 +4691,8 @@ complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcomm
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l refresh -d 'Refresh all cached data'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-refresh
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l sync -d 'Sync the environment to include module ownership metadata in the output'
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l exact -d 'Perform an exact sync, removing extraneous packages'
+complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l active -d 'Sync dependencies to the active virtual environment'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l managed-python -d 'Require use of uv-managed Python versions [env: UV_MANAGED_PYTHON=]'
 complete -c uv -n "__fish_uv_using_subcommand workspace; and __fish_seen_subcommand_from metadata" -l no-managed-python -d 'Disable use of uv-managed Python versions [env: UV_NO_MANAGED_PYTHON=]'
@@ -5212,6 +5305,9 @@ complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from dir" -l no-installer-metadata -d 'Skip writing `uv` installer metadata files (e.g., `INSTALLER`, `REQUESTED`, and `direct_url.json`) to site-packages `.dist-info` directories [env: UV_NO_INSTALLER_METADATA=]'
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from dir" -l no-config -d 'Avoid discovering configuration files (`pyproject.toml`, `uv.toml`)'
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from dir" -s h -l help -d 'Display the concise help for this command'
+complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l output-format -d 'Select the output format' -r -f -a "auto\t'Display a human-readable size in terminals and raw bytes otherwise'
+human\t'Display the cache size in a human-readable format'
+machine\t'Display the cache size in raw bytes'"
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l cache-dir -d 'Path to the cache directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l python-preference -r -f -a "only-managed\t'Only use managed Python installations; never use system Python installations'
 managed\t'Prefer managed Python installations over system Python installations'
@@ -5228,7 +5324,7 @@ complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l directory -d 'Change to the given directory prior to running the command' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l project -d 'Discover a project in the given directory' -r -f -a "(__fish_complete_directories)"
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l config-file -d 'The path to a `uv.toml` file to use for configuration' -r -F
-complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -s H -l human -d 'Display the cache size in human-readable format (e.g., `1.2 GiB` instead of raw bytes)'
+complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -s H -l human -d 'Display the cache size in human-readable format (e.g., `1.2GiB` instead of raw bytes)'
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -s n -l no-cache -d 'Avoid reading from or writing to the cache, instead using a temporary directory for the duration of the operation'
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l managed-python -d 'Require use of uv-managed Python versions [env: UV_MANAGED_PYTHON=]'
 complete -c uv -n "__fish_uv_using_subcommand cache; and __fish_seen_subcommand_from size" -l no-managed-python -d 'Disable use of uv-managed Python versions [env: UV_NO_MANAGED_PYTHON=]'
