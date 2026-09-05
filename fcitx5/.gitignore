@@ -1,1 +1,4 @@
-conf/cached_layouts
+*
+!./config
+!./profile
+!./conf/bamboo.conf
