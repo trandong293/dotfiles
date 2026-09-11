@@ -17,7 +17,8 @@ fish_add_path "$DOTNET_TOOL"
 
 # uv 
 set -x UV_INSTALL_DIR "$HOME/.local/share/uv" # installation only
-set -x UV_TOOL_BIN_DIR "$UV_INSTALL_DIR/tools"
+set -x UV_TOOL_DIR "$UV_INSTALL_DIR/tools"
+set -x UV_TOOL_BIN_DIR "$UV_INSTALL_DIR"
 set -x UV_PYTHON_BIN_DIR "$UV_INSTALL_DIR/python"
 fish_add_path "$UV_INSTALL_DIR"
 fish_add_path "$UV_TOOL_BIN_DIR"
