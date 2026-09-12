@@ -10,8 +10,8 @@ fish_add_path "$PNPM_HOME/bin"
 
 # dotnet
 set -x DOTNET_CLI_TELEMETRY_OPTOUT 1 # stupid telemetry
-set DOTNET_ROOT "$HOME/.local/share/dotnet/dotnet-current"
-set DOTNET_TOOL "$HOME/.local/share/dotnet/tools"
+set -l DOTNET_ROOT "$HOME/.local/share/dotnet/dotnet-current"
+set -l DOTNET_TOOL "$HOME/.dotnet/tools"
 fish_add_path "$DOTNET_ROOT"
 fish_add_path "$DOTNET_TOOL"
 
