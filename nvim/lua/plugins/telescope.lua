@@ -1,10 +1,11 @@
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = {
+  deps = {
     "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" }
   },
-  config = function()
+  on_load = function()
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<leader>ff", builtin.find_files)
     vim.keymap.set("n", "<leader>fg", builtin.live_grep)

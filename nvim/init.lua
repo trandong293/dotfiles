@@ -1,38 +1,33 @@
-vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro nornu" -- +nu
+vim.g.netrw_bufsettings = "noma nomod nu nobl nowrap ro rnu"
 vim.g.mapleader = " "
+vim.g.my_group = vim.api.nvim_create_augroup("CustomSettings", { clear = true })
 
 vim.o.number = true
 vim.o.relativenumber = true
+
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
-vim.o.colorcolumn = "81"
 
-local help_nu_aug = vim.api.nvim_create_augroup("HelpNuAug", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "help",
-  group = help_nu_aug,
-  command = "setlocal number"
-})
+vim.o.colorcolumn = "81"
 
 vim.o.wrap = false
 
 vim.o.expandtab = true
-vim.o.shiftwidth = 2
 vim.o.tabstop = 2
+vim.o.shiftwidth = 2
 
 vim.o.foldlevelstart = 99
 
 vim.diagnostic.config({
   severity_sort = true,
+  sign = false,
   update_in_insert = true,
-  virtual_text = { severity = { min = vim.diagnostic.severity.WARN } },
-  signs = false,
+  virtual_text = {
+    severity = {
+      vim.diagnostic.severity.WARN,
+      vim.diagnostic.severity.ERROR
+    }
+  }
 })
-
--- https://stackoverflow.com/questions/1444322/how-can-i-close-a-buffer-without-closing-the-window
--- conflict with netrw
-vim.keymap.set("n", "<leader>bd", ":bp<bar>sp<bar>bn<bar>bd<CR>")
-
-vim.filetype.add({ extension = { razor = "razor" } })
 
 require("plugins")

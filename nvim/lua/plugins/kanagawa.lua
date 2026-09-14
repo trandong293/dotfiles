@@ -1,6 +1,6 @@
 return {
   "rebelot/kanagawa.nvim",
-  config = function()
+  on_load = function()
     vim.cmd("colorscheme kanagawa-dragon")
   end
 }

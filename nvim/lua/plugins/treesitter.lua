@@ -1,32 +1,28 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  branch = "main",
-  build = ":TSUpdate",
-  config = function()
-    local langs = {
-      "lua",
-      "c", "glsl", "asm",
-      "bash",
-      "c_sharp", "razor",
-      "javascript", "typescript", "html", "css", "angular",
-      "json", "toml", "yaml", "csv",
-      "markdown", "markdown_inline",
-      "latex",
-      "scheme", -- gimp
-    }
-    require("nvim-treesitter").install(langs)
-
-    -- highlight
-    local ts_hl_aug = vim.api.nvim_create_augroup("TsHlAug", { clear = true })
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = langs,
-      group = ts_hl_aug,
-      callback = function() vim.treesitter.start() end
-    })
-    -- fold
+  build = function() vim.cmd("TSUpdate") end,
+  on_load = function()
     vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
     vim.wo[0][0].foldmethod = "expr"
-    -- indent
-    vim.bo.indentexpr = 'v:lua.require("nvim-treesitter").indentexpr()'
+
+    local langs = {
+      "lua",
+      "c", "asm",
+      "markdown", "markdown_inline",
+      "typescript", "javascript",
+      "html", "css",
+      "angular",
+      "python",
+      "c_sharp",
+      "go",
+    }
+
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.g.custom_group,
+      pattern = langs,
+      callback = function() vim.treesitter.start() end
+    })
+
+    require("nvim-treesitter").install(langs)
   end
 }

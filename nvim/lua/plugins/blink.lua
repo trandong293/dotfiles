@@ -1,7 +1,10 @@
 return {
   "saghen/blink.cmp",
-  tag = "v1.8.0",
-  config = function()
+  deps = { "saghen/blink.lib" },
+  build = function()
+    require("blink.cmp").build():pwait()
+  end,
+  on_load = function()
     require("blink.cmp").setup({
       keymap = {
         preset = "default",
