@@ -1,5 +1,5 @@
 local terminal = "alacritty"
-local file_manager = "dolphin"
+local file_manager = "nautilus"
 local app_launcher = "~/.config/rofi/launcher.sh"
 local browser = "firefox"
 local lock = "hyprlock"
@@ -114,7 +114,7 @@ hl.window_rule({
 
 hl.window_rule({
   match = {
-    class = "org.kde.dolphin"
+    class = "org.gnome.Nautilus"
   },
   float = true,
   size = { 800, 600 },
