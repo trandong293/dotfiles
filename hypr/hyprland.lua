@@ -1,6 +1,6 @@
-local terminal = "alacritty"
+local terminal = "foot"
 local file_manager = "nautilus"
-local app_launcher = "~/.config/rofi/launcher.sh"
+local app_launcher = "fuzzel"
 local browser = "firefox"
 local lock = "hyprlock"
 
@@ -114,6 +114,15 @@ hl.window_rule({
 
 hl.window_rule({
   match = {
+    class = "foot"
+  },
+  float = true,
+  size = { 800, 600 },
+  center = true
+})
+
+hl.window_rule({
+  match = {
     class = "org.gnome.Nautilus"
   },
   float = true,
@@ -135,6 +144,7 @@ end)
 -----------------
 --- VARIABLES ---
 -----------------
+
 local general = {
   border_size = 2,
   gaps_in = 0,
