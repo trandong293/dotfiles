@@ -166,6 +166,7 @@ local input = {
   sensitivity = 0.0,
   follow_mouse = 1, -- todo
   touchpad = {
+    disable_while_typing = true,
     natural_scroll = true,
     scroll_factor = 0.5
   }
