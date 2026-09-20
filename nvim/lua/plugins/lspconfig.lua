@@ -11,28 +11,44 @@ return {
       group = vim.g.custom_group,
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        if client then client.server_capabilities.semanticTokensProvider = nil end
+        if client then
+          client.server_capabilities.semanticTokensProvider = nil
+
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = vim.g.custom_group,
+            callback = function()
+              vim.lsp.buf.format()
+            end
+          })
+        end
       end
     })
 
-    vim.api.nvim_create_autocmd({ "BufWritePre", "LspAttach" }, {
-      group = vim.g.custom_group,
-      callback = function()
-        vim.lsp.buf.format()
-      end
-    })
 
     vim.lsp.config("lua_ls", {
       settings = { Lua = { diagnostics = { globals = { "vim" } } } }
     })
 
-    --vim.lsp.config("angularls", {
-    --  root_dir = function(bufnr, on_dir)
-    --    local root_markers = vim.lsp.config["angularls"].root_markers
-    --    local root_dir = vim.fs.root(bufnr, root_markers)
-    --    if root_dir then on_dir(root_dir) end
-    --  end
-    --})
+    local html_filetypes = vim.lsp.config["html"].filetypes
+    table.insert(html_filetypes, "htmlangular")
+    vim.lsp.config("html", { filetypes = html_filetypes })
+
+    vim.lsp.config("angularls", {
+      cmd = {
+        "pnpm",
+        "ngserver",
+        "--stdio",
+        "--tsProbeLocations",
+        "node_modules/",
+        "--ngProbeLocations",
+        "node_modules/"
+      },
+      root_dir = function(bufnr, on_dir)
+        local root_markers = vim.lsp.config["angularls"].root_markers
+        local root_dir = vim.fs.root(bufnr, root_markers)
+        if root_dir then on_dir(root_dir) end
+      end
+    })
 
     local lang_servers = {
       "lua_ls",        -- pm
@@ -41,7 +57,7 @@ return {
       "cssls", "html", -- pnpm, @t1ckbase/vscode-langservers-extracted
       "gopls",         -- go
       "roslyn",        -- dotnet tool, roslyn plug
-      --"angularls",     -- pnpm, painful, conflict with tsc in ts7
+      "angularls",     -- pnpm, install @angularls/language-server and typescript@6 locally
       "ruff", "pyrefly",
     }
     vim.lsp.enable(lang_servers)

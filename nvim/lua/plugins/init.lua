@@ -29,6 +29,7 @@ for fname, ftype in vim.fs.dir(plug_path) do
 end
 
 vim.api.nvim_create_autocmd("PackChanged", {
+  group = vim.g.custom_group,
   callback = function(ev)
     local kind = ev.data.kind
     if kind == "install" or kind == "update" then
