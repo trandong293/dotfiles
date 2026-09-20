@@ -98,37 +98,27 @@ hl.bind("SUPER + T", hl.dsp.exec_cmd(script_path .. "/color_pickers.sh"))
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + C", hl.dsp.window.close())
 hl.bind("SUPER + M", hl.dsp.exit())
+hl.bind("SUPER + J", hl.dsp.layout("togglesplit"))
 
 --------------------
 --- WINDOW RULES ---
 --------------------
 
-hl.window_rule({
-  match = {
-    class = "Alacritty"
-  },
-  float = true,
-  size = { 800, 600 },
-  center = true
-})
-
-hl.window_rule({
-  match = {
-    class = "foot"
-  },
-  float = true,
-  size = { 800, 600 },
-  center = true
-})
-
-hl.window_rule({
-  match = {
-    class = "org.gnome.Nautilus"
-  },
-  float = true,
-  size = { 800, 600 },
-  center = true
-})
+local floating_window_classes = {
+  "foot",
+  "org.gnome.Nautilus",
+  "xdg-desktop-portal-gtk"
+}
+for _, class in ipairs(floating_window_classes) do
+  hl.window_rule({
+    match = {
+      class = class
+    },
+    float = true,
+    size = { 800, 600 },
+    center = true
+  })
+end
 
 -----------------
 --- AUTOSTART ---
@@ -199,6 +189,9 @@ hl.config({
   },
   debug = {
     vfr = true
+  },
+  dwindle = {
+    preserve_split = true
   }
 })
 
