@@ -1,4 +1,2 @@
-*
-!./config
-!./profile
-!./conf/bamboo.conf
+conf/cached_layouts
+conf/notifications.conf
