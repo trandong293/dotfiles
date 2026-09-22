@@ -1,0 +1,122 @@
+#!/usr/bin/env sh
+
+sudo pacman -Syu
+sudo pacman -S \
+  noto-fonts noto-fonts-cjk noto-fonts-emoji \
+  rtkit pipewire \
+  make go uv rustup clang lua-language-server \
+  firefox intel-media-driver \
+  nautilus xdg-desktop-portal-gtk gnome-themes-extra \
+  hyprland hypridle hyprlock hyprpaper hyprpicker xdg-desktop-portal-hyprland \
+  grim slurp brightnessctl fuzzel \
+  feh mpv fcitx5-bamboo zathura zathura-pdf-poppler \
+  fish foot tmux \
+  neovim tree-sitter-cli ripgrep fd bat \
+  git openssh jq less man fakeroot wl-clipboard htop unzip
+
+bold=$(tput bold)
+norm=$(tput sgr0)
+echo_bold() {
+  echo "${bold}$1${norm}"
+}
+
+###############
+### CONFIGS ###
+###############
+
+echo_bold 'CONFIGS'
+cd
+
+echo '(1/3) Cloning dotfiles'
+git clone --recurse-submodules https://codeberg.org/trandong293/dotfiles .config
+git remote set-url origin ssh://git@codeberg.org/trandong293/dotfiles
+
+echo '(2/3) Creating symlink .bash_profile'
+ln -sf ~/.config/.bash_profile ~/.bash_profile
+
+echo '(3/3) Extracting ssh key'
+gpg -d ~/.config/storage/ssh.tar.gz.gpg | tar -xf - -C ~/
+
+#############
+### FONTS ###
+#############
+
+echo_bold 'FONTS'
+mkdir -p ~/.local/share/fonts/ttf
+mkdir -p ~/.local/share/fonts/otf
+cd ~/.local/share/fonts
+
+echo '(1/2) Extracting Comic Code font'
+gpg -d ~/.config/storage/coco.tar.xz.gpg | tar -xJf - -C otf
+rm coco.tar.xz.gpg
+
+echo '(1/2) Extracting Agave Nerd Font'
+mkdir ttf/AgaveNerdFont
+curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest |
+  jq '.assets.[] | select(.name == "Agave.tar.xz").browser_download_url' |
+  xargs curl -LO
+tar -xf Agave.tar.xz -C ttf/AgaveNerdFont
+rm Agave.tar.xz
+
+###########
+### AUR ###
+###########
+
+echo_bold 'AUR'
+mkdir ~/aur
+
+echo '(1/2) Processing package pnpm-bin'
+git clone https://aur.archlinux.org/pnpm-bin.git aur/pnpm-bin
+cd aur/pnpm-bin
+makepkg && sudo pacman -U *.pkg.tar.zst
+
+##############
+### OTHERS ###
+##############
+
+echo_bold 'OTHERS'
+cd
+
+echo '(1/8) Configuring git'
+git config --global user.email 'trandong2932002@gmail.com'
+git config --global user.name 'Tran Dong'
+
+echo '(2/8) Setting dark mode in gtk'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+
+echo '(3/8) Installing Python language servers'
+uv tool install ruff
+uv tool install pyrefly
+
+echo '(4/8) Installing Go language server'
+go telemetry off
+go install golang.org/x/tools/gopls@latest
+ 
+# require building nvim blink.cmp v2
+echo '(5/8) Installing rustc'
+rustup default stable
+
+echo '(6/8) Removing annoying splash screeen on boot'
+sudo sed -i -e '/default_options/s/^/#/' \
+  -e '/default_options/s/$/\ndefault_options=""/' linux.preset
+sudo mkinitcpio -P
+
+echo '(7/8) Installing dotnet and roslyn-language-server'
+mkdir -p ~/.local/share/dotnet && cd $_
+curl -s https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json |
+  jq '."releases-index".[] | select(."support-phase" == "active")."releases.json"' |
+  xargs curl -s |
+  jq '.releases.[0].sdks[-1].files.[] | select(.rid == "linux-x64").url' |
+  xargs curl -LO
+echo *.tar.gz | sed -e 's/dotnet-sdk-\(.*\)-linux-x64.tar.gz/\1/' |
+  xargs -I {} mkdir dotnet{}
+tar -xf *.tar.gz -C dotnet*/
+rm *.tar.gz
+ln -sf dotnet*/ dotnet-current
+dotnet tool install -g roslyn-language-server --prerelease --source https://pkgs.dev.azure.com/azure-public/vside/_packaging/vs-impl/nuget/v3/index.json
+
+echo '(8/8) Installing node, typescript, vscode-langservers-extracted'
+pnpm runtime set node latest -g
+pnpm install typescript -g
+pnpm install @t1ckbase/vscode-langservers-extracted -g
