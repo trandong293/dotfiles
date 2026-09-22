@@ -1,22 +1,18 @@
 *
 !*/**
-# directories
-!foot/
 !fcitx5/
 !fish/
-!hypr/
-!nvim/
+!foot/
 !fuzzel/
-!tmux/
-!._storage_/
-!wireplumber
+!hypr/
+!mpv/
+!nvim/
 !pacman/
-!mpv
-!zathura
-!vim
-# files
-!readme.md
-!.tmux.conf
+!tmux/
+!wireplumber/
+!zathura/
+
+!.bash_profile
 !.gitignore
-!mimeapps.list
-!init.sh
+!.gitmodules
+!readme.md
