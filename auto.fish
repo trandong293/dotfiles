@@ -28,8 +28,13 @@ echo_bold 'CONFIGS'
 cd
 
 echo '(1/3) Cloning dotfiles'
-git clone --recurse-submodules https://codeberg.org/trandong293/dotfiles .config
+git clone --recurse-submodules https://codeberg.org/trandong293/dotfiles
+mv dotfiles/* .config
+mv dotfiles/.* .config
+rm -r dotfiles
+cd .config
 git remote set-url origin ssh://git@codeberg.org/trandong293/dotfiles
+cd
 
 echo '(2/3) Creating symlink .bash_profile'
 ln -sf ~/.config/.bash_profile ~/.bash_profile
