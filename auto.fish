@@ -28,12 +28,9 @@ echo_bold 'CONFIGS'
 cd
 
 echo '(1/4) Cloning dotfiles'
-git clone --recurse-submodules https://codeberg.org/trandong293/dotfiles
-mv -f dotfiles/* .config
-mv -f dotfiles/.* .config
-rm -r dotfiles
-cd .config
-git remote set-url origin ssh://git@codeberg.org/trandong293/dotfiles
+rm -rf .config
+git clone --recurse-submodules https://codeberg.org/trandong293/dotfiles .config
+cd .config && git remote set-url origin ssh://git@codeberg.org/trandong293/dotfiles
 cd
 
 echo '(2/4) Sourcing new envs'
