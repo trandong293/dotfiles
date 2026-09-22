@@ -4,11 +4,12 @@
 !fish/
 !foot/
 !fuzzel/
-!gnupg
+!gnupg/
 !hypr/
 !mpv/
 !nvim/
 !pacman/
+!storage/
 !tmux/
 !wireplumber/
 !zathura/
