@@ -17,5 +17,5 @@
 !.bash_profile
 !.gitignore
 !.gitmodules
-!auto.sh
+!auto.fish
 !readme.md

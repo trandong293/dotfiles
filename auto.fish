@@ -1,7 +1,7 @@
-#!/usr/bin/env sh
+#!/usr/bin/env fish
 
 sudo pacman -Syu
-sudo pacman -S \
+sudo pacman -S --needed \
   noto-fonts noto-fonts-cjk noto-fonts-emoji \
   rtkit pipewire \
   make go uv rustup clang lua-language-server \
@@ -14,11 +14,11 @@ sudo pacman -S \
   neovim tree-sitter-cli ripgrep fd bat \
   git openssh jq less man fakeroot wl-clipboard htop unzip
 
-bold=$(tput bold)
-norm=$(tput sgr0)
-echo_bold() {
-  echo "${bold}$1${norm}"
-}
+set bold $(tput bold)
+set norm $(tput sgr0)
+function echo_bold -a msg
+  echo "$bold$msg$norm"
+end
 
 ###############
 ### CONFIGS ###
@@ -48,9 +48,8 @@ cd ~/.local/share/fonts
 
 echo '(1/2) Extracting Comic Code font'
 gpg -d ~/.config/storage/coco.tar.xz.gpg | tar -xJf - -C otf
-rm coco.tar.xz.gpg
 
-echo '(1/2) Extracting Agave Nerd Font'
+echo '(2/2) Extracting Agave Nerd Font'
 mkdir ttf/AgaveNerdFont
 curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest |
   jq '.assets.[] | select(.name == "Agave.tar.xz").browser_download_url' |
@@ -65,7 +64,7 @@ rm Agave.tar.xz
 echo_bold 'AUR'
 mkdir ~/aur
 
-echo '(1/2) Processing package pnpm-bin'
+echo '(1/1) Processing package pnpm-bin'
 git clone https://aur.archlinux.org/pnpm-bin.git aur/pnpm-bin
 cd aur/pnpm-bin
 makepkg && sudo pacman -U *.pkg.tar.zst
@@ -99,11 +98,12 @@ rustup default stable
 
 echo '(6/8) Removing annoying splash screeen on boot'
 sudo sed -i -e '/default_options/s/^/#/' \
-  -e '/default_options/s/$/\ndefault_options=""/' linux.preset
+  -e '/default_options/s/$/\ndefault_options=""/' /etc/mkinitcpio.d/linux.preset
 sudo mkinitcpio -P
 
 echo '(7/8) Installing dotnet and roslyn-language-server'
-mkdir -p ~/.local/share/dotnet && cd $_
+mkdir -p ~/.local/share/dotnet
+cd ~/.local/share/dotnet
 curl -s https://builds.dotnet.microsoft.com/dotnet/release-metadata/releases-index.json |
   jq '."releases-index".[] | select(."support-phase" == "active")."releases.json"' |
   xargs curl -s |
@@ -114,6 +114,7 @@ echo *.tar.gz | sed -e 's/dotnet-sdk-\(.*\)-linux-x64.tar.gz/\1/' |
 tar -xf *.tar.gz -C dotnet*/
 rm *.tar.gz
 ln -sf dotnet*/ dotnet-current
+cd
 dotnet tool install -g roslyn-language-server --prerelease --source https://pkgs.dev.azure.com/azure-public/vside/_packaging/vs-impl/nuget/v3/index.json
 
 echo '(8/8) Installing node, typescript, vscode-langservers-extracted'
