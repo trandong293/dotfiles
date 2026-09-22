@@ -3,6 +3,10 @@ end
 
 set -U fish_greeting
 
+# gnupg
+set -x GPG_TTY $(tty)
+set -x GNUPGHOME "$HOME/.config/gnupg"
+
 # pnpm
 set -x PNPM_HOME "$HOME/.local/share/pnpm"
 fish_add_path "$PNPM_HOME/bin"
