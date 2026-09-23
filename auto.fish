@@ -3,7 +3,7 @@
 sudo pacman -Syu
 sudo pacman -S --needed \
   noto-fonts noto-fonts-cjk noto-fonts-emoji \
-  rtkit pipewire \
+  rtkit \
   make go uv rustup clang lua-language-server \
   firefox intel-media-driver \
   nautilus xdg-desktop-portal-gtk gnome-themes-extra \
