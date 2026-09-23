@@ -29,7 +29,8 @@ cd
 
 echo '(1/4) Cloning dotfiles'
 rm -rf .config
-git clone --recurse-submodules https://codeberg.org/trandong293/dotfiles .config
+# remember to fetch unshallow after this script
+git clone --depth 1 --recurse-submodules https://codeberg.org/trandong293/dotfiles .config
 cd .config && git remote set-url origin ssh://git@codeberg.org/trandong293/dotfiles
 cd
 
@@ -84,6 +85,8 @@ cd
 echo '(1/8) Configuring git'
 git config --global user.email 'trandong2932002@gmail.com'
 git config --global user.name 'Tran Dong'
+git config --global core.editor 'nvim'
+git config --global init.defaultBranch 'main'
 
 echo '(2/8) Setting dark mode in gtk'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
